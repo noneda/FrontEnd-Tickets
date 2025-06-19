@@ -11,7 +11,7 @@ const NavBarMobile = () => {
 
       <label
         htmlFor="menu-toggle"
-        className="absolute peer-checked/buttonNav:fixed xl:hidden z-25 top-[2.5%] right-0 w-auto flex items-center bg-white rounded-l-2xl shadow-lg"
+        className="fixed xl:hidden z-25 top-[2.5%] right-0 w-auto flex items-center bg-white rounded-l-2xl shadow-lg"
       >
         <div className="w-9 h-10 cursor-pointer flex flex-col items-center justify-center">
           <div className="w-[50%] h-[2px] bg-black rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked/buttonNav:rotate-[-45deg]"></div>
