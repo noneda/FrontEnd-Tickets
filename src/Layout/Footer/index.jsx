@@ -1,8 +1,8 @@
 const LayoutFooter = () => {
   return (
     <footer className="z-0 flex flex-col w-full">
-      <section className="w-full h-200 bg-[#428041] flex flex-col items-center">
-        <div className="w-11/12 h-11/12 bg-[#fff] shadow-md/20 rounded-md -top-10 flex flex-col justify-baseline items-center px-12 py-10 gap-10">
+      <section className="relative w-full h-200 bg-[#428041] flex flex-col items-center">
+        <div className="absolute w-11/12 h-11/12 bg-[#fff] shadow-md/20 rounded-md -top-10 flex flex-col justify-baseline items-center px-12 py-10 gap-10">
           <section className="flex flex-col justify-baseline items-baseline gap-2.5 [&>h5]:font-normal [&>h5]:text-[#434343]">
             <h4 className="text-xl text-[#428041] font-semibold">
               Alcaldía Municipal de Cota, Cundinamarca
@@ -27,11 +27,13 @@ const LayoutFooter = () => {
                 class="w-[80px] h-14 lg:w-[80px] lg:h-[5rem] object-contain"
               />
             </div>
-            <div className="w-[137%] h-[100px] overflow-hidden">
-              <iframe
-                src="https://horalegal.inm.gov.co/inm/"
-                className="w-[99%] scale-[0.99]"
-              />
+            <div className="w-[145%] h-[100px] overflow-hidden">
+              <div className="w-full h-full flex flex-col justify-center items-center">
+                <iframe
+                  src="https://horalegal.inm.gov.co/inm/"
+                  className="scale-[0.75] h-[125px] w-[145%]"
+                />
+              </div>
             </div>
           </section>
           <section></section>
