@@ -1,21 +1,25 @@
-import { SectionNav } from "../../Utils/NavBar";
+import { SectionNav } from "../../../Utils/NavBar";
 
 const NavBarMobile = () => {
   return (
     <>
-      <input id="menu-toggle" type="checkbox" className="hidden peer" />
+      <input
+        id="menu-toggle"
+        type="checkbox"
+        className="hidden peer/buttonNav"
+      />
 
       <label
         htmlFor="menu-toggle"
-        className="absolute xl:hidden z-25 top-[2.5%] right-0 w-auto flex items-center bg-white rounded-l-2xl"
+        className="absolute peer-checked/buttonNav:fixed xl:hidden z-25 top-[2.5%] right-0 w-auto flex items-center bg-white rounded-l-2xl shadow-lg"
       >
         <div className="w-9 h-10 cursor-pointer flex flex-col items-center justify-center">
-          <div className="w-[50%] h-[2px] bg-black rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] "></div>
-          <div className="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-center "></div>
-          <div className="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] "></div>
+          <div className="w-[50%] h-[2px] bg-black rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked/buttonNav:rotate-[-45deg]"></div>
+          <div className="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-center peer-checked/buttonNav:hidden"></div>
+          <div className="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked/buttonNav:rotate-[45deg]"></div>
         </div>
       </label>
-      <section className="hidden peer-checked:flex absolute flex-col  z-20 w-full h-full bg-[#fff] top-0 left-0">
+      <section className="scrollbar-hidden hidden peer-checked/buttonNav:flex fixed overflow-auto flex-col  z-20 w-full h-full bg-[#fff] top-0 left-0">
         <div className="flex flex-row justify-between items-center">
           <div className="flex item-center justify-start-self items-center gap-3 w-5/6 py-4 px-2">
             <img
@@ -47,9 +51,9 @@ const NavBarMobile = () => {
                       <li key={"son-" + i}>{son.name}</li>
                     ) : (
                       <li key={"has-son-" + i} className="group/son" y>
-                        <div className="flex flex-row justify- items-center gap-20">
+                        <div className="flex flex-row justify-baseline items-center gap-20">
                           <section>{son.name}</section>
-                          <i class="self-start py-2 fa-solid fa-chevron-right transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
+                          <i class="self-start py-2 fa-solid fa-chevron-down transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
                         </div>
                         <ul className="hidden group-hover/son:flex flex-col justify-center items-baseline *:px-10 *:py-2 *:font-normal *:hover:bg-[#8c2226] *:hover:text-[#fff] *:hover:font-bold w-full *:w-full">
                           {son.children.map((e, n) =>
@@ -59,11 +63,12 @@ const NavBarMobile = () => {
                               <li
                                 key={"has-grandson-" + n}
                                 className="group/grandson"
-                                y
                               >
-                                <section>{e.name}</section>
-                                <i class="self-start py-2 fa-solid fa-chevron-right transform group-hover/grandson:rotate-180 duration-500 group-hover/grandson:text-[#8c2226]" />
-                                <ul>
+                                <div className="flex flex-row justify-baseline items-center gap-20">
+                                  <section>{e.name}</section>
+                                  <i class="self-start py-2 fa-solid fa-chevron-down transform group-hover/grandson:rotate-180 duration-500 group-grandson/son:text-[#fff]" />
+                                </div>
+                                <ul className="hidden group-hover/grandson:flex flex-col justify-center items-baseline *:px-10 *:py-2 *:font-normal *:hover:bg-[#fff] *:hover:text-[#8c2226] *:hover:font-bold w-full *:w-full">
                                   {e.children.map((_, d) => (
                                     <li key={"more-grandson-" + d}>{_.name}</li>
                                   ))}

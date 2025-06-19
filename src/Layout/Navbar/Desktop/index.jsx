@@ -1,8 +1,8 @@
-import { SectionNav } from "../../Utils/NavBar";
+import { SectionNav } from "../../../Utils/NavBar";
 
 const NavBarDesktop = () => {
   return (
-    <ul className="w-full relative hidden xl:flex pt-2 flex-row justify-center items-center border-b-[#428041] border-b-2 h-auto *:w-auto *:min-w-auto *:max-w-[225px] *:h-[45px] *:flex *:justify-center *:gap-5 *:items-center *:px-5 *:py-1 *:bg-transparent *:hover:bg-[#8c2226] *:text-wrap *:hover:text-white *:hover:font-bold *:text-sm  *:cursor-pointer *:relative">
+    <ul className="w-full z-10 relative hidden xl:flex pt-2 flex-row justify-center items-center border-b-[#428041] border-b-2 h-auto *:w-auto *:min-w-auto *:max-w-[225px] *:h-[45px] *:flex *:justify-center *:gap-5 *:items-center *:px-5 *:py-1 *:bg-transparent *:hover:bg-[#8c2226] *:text-wrap *:hover:text-white *:hover:font-bold *:text-sm  *:cursor-pointer *:relative">
       {SectionNav.map((father, index) =>
         father.children === undefined ? (
           <li key={"father-" + index}>

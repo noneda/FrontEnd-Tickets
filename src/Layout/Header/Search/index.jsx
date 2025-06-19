@@ -11,7 +11,7 @@ const HeaderSearch = () => {
           type="search"
         />
         <svg
-          className="size-6 absolute top-3 left-[90%] xl:right-3 text-gray-500"
+          className="size-6 absolute top-3 right-[10%] xl:right-3 text-gray-500"
           stroke="currentColor"
           strokeWidth="1.5"
           viewBox="0 0 24 24"
