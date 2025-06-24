@@ -1,7 +1,7 @@
 const LayoutFooter = () => {
   return (
     <footer className="z-0 flex flex-col w-full">
-      <section className="relative w-full h-175 xl:h-125  bg-[#428041] flex flex-col items-center">
+      <section className="relative w-full h-180 xl:h-120  bg-[#428041] flex flex-col items-center">
         <div className="absolute w-11/12 h-auto bg-[#fff]  shadow-md/20 rounded-md -top-10 flex flex-col flex-wrap xl:flex-row xl:justify-between justify-baseline items-center px-12 py-10 gap-10">
           <section className="flex flex-col justify-baseline items-baseline xl:w-1/3 xl:gap-0 gap-2.5 [&>h5]:font-normal [&>h5]:text-[#434343]">
             <h4 className="text-xl text-[#428041] font-semibold">
