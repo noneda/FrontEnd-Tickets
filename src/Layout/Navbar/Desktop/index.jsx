@@ -20,10 +20,9 @@ const NavBarDesktop = () => {
                   <li
                     key={"has-son-" + i}
                     className="relative group/son flex flex-row justify-between items-center"
-                    y
                   >
                     <section>{son.name}</section>
-                    <i class="self-start py-2 fa-solid fa-chevron-right transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
+                    <i className="self-start py-2 fa-solid fa-chevron-right transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
                     <ul
                       className={`hidden group-hover/son:block absolute ${
                         index < 3 ? "left-[100%]" : "right-[100%]"
@@ -36,10 +35,9 @@ const NavBarDesktop = () => {
                           <li
                             key={"has-grandson-" + n}
                             className="relative group/grandson flex flex-row justify-between items-center"
-                            y
                           >
                             <section>{e.name}</section>
-                            <i class="self-start py-2 fa-solid fa-chevron-right transform group-hover/grandson:rotate-180 duration-500 group-hover/grandson:text-[#8c2226]" />
+                            <i className="self-start py-2 fa-solid fa-chevron-right transform group-hover/grandson:rotate-180 duration-500 group-hover/grandson:text-[#8c2226]" />
                             <ul
                               className={`hidden group-hover/grandson:block absolute ${
                                 index < 3 ? "left-[100%]" : "right-[100%]"

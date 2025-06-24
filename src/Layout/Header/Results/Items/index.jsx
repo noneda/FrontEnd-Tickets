@@ -7,7 +7,7 @@ const ResultsItemsHeader = () => {
           alt="example"
         />
       </section>
-      <section class="flex flex-col py-5 md:pl-40">
+      <section className="flex flex-col py-5 md:pl-40">
         <h3 className="text-2xl text-[#3366CC]">Title Where this explicate</h3>
         <span className="text-sm text-[#428041]">https://idk.com</span>
         <p className="text-sm">Context</p>

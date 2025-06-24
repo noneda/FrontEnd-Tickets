@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../Layout";
-import KidsPage from "../Pages/KidsPage";
+import SystemApp from "../Pages/SystemApp";
+import Example from "../Pages/SystemApp/ExampleForm";
 
 const Routes = createBrowserRouter([
   {
@@ -10,7 +11,11 @@ const Routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: KidsPage,
+        Component: SystemApp,
+      },
+      {
+        path: "Example",
+        Component: Example,
       },
     ],
   },

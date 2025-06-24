@@ -8,8 +8,10 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <NavBar />
-      <main className="py-20">{Outlet}</main>
+      {/* <NavBar /> */}
+      <main className="py-20 px-10">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

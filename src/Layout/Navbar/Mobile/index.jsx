@@ -24,7 +24,7 @@ const NavBarMobile = () => {
           <div className="flex item-center justify-start-self items-center gap-3 w-5/6 py-4 px-2">
             <img
               src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/escudo-municipio.png"
-              class="w-[3rem] sm:w-[5rem]"
+              className="w-[3rem] sm:w-[5rem]"
               alt="logo"
             />
             <h2 className="text-[1.1rem] font-normal text-left lg:text-start">
@@ -50,10 +50,10 @@ const NavBarMobile = () => {
                     son.children === undefined ? (
                       <li key={"son-" + i}>{son.name}</li>
                     ) : (
-                      <li key={"has-son-" + i} className="group/son" y>
+                      <li key={"has-son-" + i} className="group/son">
                         <div className="flex flex-row justify-baseline items-center gap-20">
                           <section>{son.name}</section>
-                          <i class="self-start py-2 fa-solid fa-chevron-down transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
+                          <i className="self-start py-2 fa-solid fa-chevron-down transform group-hover/son:rotate-180 duration-500 group-hover/son:text-[#8c2226]" />
                         </div>
                         <ul className="hidden group-hover/son:flex flex-col justify-center items-baseline *:px-10 *:py-2 *:font-normal *:hover:bg-[#8c2226] *:hover:text-[#fff] *:hover:font-bold w-full *:w-full">
                           {son.children.map((e, n) =>
@@ -66,7 +66,7 @@ const NavBarMobile = () => {
                               >
                                 <div className="flex flex-row justify-baseline items-center gap-20">
                                   <section>{e.name}</section>
-                                  <i class="self-start py-2 fa-solid fa-chevron-down transform group-hover/grandson:rotate-180 duration-500 group-grandson/son:text-[#fff]" />
+                                  <i className="self-start py-2 fa-solid fa-chevron-down transform group-hover/grandson:rotate-180 duration-500 group-grandson/son:text-[#fff]" />
                                 </div>
                                 <ul className="hidden group-hover/grandson:flex flex-col justify-center items-baseline *:px-10 *:py-2 *:font-normal *:hover:bg-[#fff] *:hover:text-[#8c2226] *:hover:font-bold w-full *:w-full">
                                   {e.children.map((_, d) => (
