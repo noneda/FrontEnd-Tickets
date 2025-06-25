@@ -6,48 +6,60 @@ const SystemApp = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 justify-items-center *:px-4 *:py-2">
-      {SectSystem.map((element, index) => {
-        const styles = colorMap[element.color] || colorMap.white;
-        return (
-          <div
-            className="group/system relative flex w-80 xl:w-100 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg hover:shadow-2xl hover:scale-105"
-            key={"SectSystem-" + index}
-          >
+    <>
+      <section className="text-center flex flex-col gap-4">
+        <h2 className="text-3xl text-gray-700">
+          Área <span className="font-bold">TIC</span>
+        </h2>
+        <h3 className="text-base text-gray-600">
+          Tecnologías de la información y Comunicación
+        </h3>
+        <p className="text-gray-500 text-sm">Solicitud de Soporte Técnico </p>
+        <h5>Selecciona tu solicitud</h5>
+      </section>
+      <section className="pt-20 w-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 justify-items-center *:px-4 *:py-2">
+        {SectSystem.map((element, index) => {
+          const styles = colorMap[element.color] || colorMap.white;
+          return (
             <div
-              className={`relative flex  justify-center items-center mx-4 -mt-6 h-40 overflow-visible rounded-xl text-white shadow-lg ${styles.bgGradient}`}
+              className="group/system relative flex w-80 xl:w-100 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg hover:shadow-2xl hover:scale-105"
+              key={"SectSystem-" + index}
             >
-              <img
-                src={element.img}
-                alt=""
-                className="absolute -top-10 bg-cover h-full bg-center group-hover/system:-top-12 transition-all delay-50 duration-200"
-              />
-            </div>
-            <div className="p-6">
-              <h5
-                className={`mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal ${styles.text}`}
+              <div
+                className={`relative flex  justify-center items-center mx-4 -mt-6 h-40 overflow-visible rounded-xl text-white shadow-lg ${styles.bgGradient}`}
               >
-                {element.name}
-              </h5>
-              <p className="block font-sans text-base font-light leading-relaxed text-inherit">
-                {element.name}
-              </p>
+                <img
+                  src={element.img}
+                  alt=""
+                  className="absolute -top-10 bg-cover h-full bg-center group-hover/system:-top-12 transition-all delay-50 duration-200"
+                />
+              </div>
+              <div className="p-6">
+                <h5
+                  className={`mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal ${styles.text}`}
+                >
+                  {element.name}
+                </h5>
+                <p className="block font-sans text-base font-light leading-relaxed text-inherit">
+                  {element.name}
+                </p>
+              </div>
+              <div className="p-6 pt-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigate("/form/" + element.name);
+                  }}
+                  className={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                >
+                  Read More
+                </button>
+              </div>
             </div>
-            <div className="p-6 pt-0">
-              <button
-                type="button"
-                onClick={() => {
-                  navigate("/form/" + element.name);
-                }}
-                className={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-              >
-                Read More
-              </button>
-            </div>
-          </div>
-        );
-      })}
-    </section>
+          );
+        })}
+      </section>
+    </>
   );
 };
 

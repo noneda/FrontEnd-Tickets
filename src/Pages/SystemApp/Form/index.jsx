@@ -115,7 +115,7 @@ const Form = () => {
             >
               Subir Archivos
             </button>
-            <input type="file" name="archives" class="hidden" />
+            <input type="file" name="archives" class="hidden" multiple />
           </div>
         </section>
 
