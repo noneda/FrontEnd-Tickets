@@ -56,6 +56,16 @@ const Form = () => {
               className={`w-11/12 border rounded-lg py-1 shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1  hover:shadow-lg ${styles.inputText} pl-4 text-gray-600`}
             />
           </div>
+          <div className="group/little h-auto px-5 py-10 flex flex-col justify-center items-baseline rounded-xl  shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <label htmlFor="Text" className={`text-xl ${styles.text}`}>
+              Question Type Text Area
+            </label>
+            <textarea
+              type="text"
+              id="Text"
+              className={`w-11/12 h-30 border rounded-lg py-1 shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1  hover:shadow-lg ${styles.inputText} px-4 text-gray-600`}
+            />
+          </div>
           <div className="group/little text-sm h-30 px-5 py-10 flex flex-col justify-center items-baseline rounded-xl  shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1">
             <label htmlFor="Select" className={`text-xl ${styles.text}`}>
               Question Type Select
@@ -89,7 +99,7 @@ const Form = () => {
                       htmlFor={"hr-" + i}
                       class={`h-5 w-5 flex rounded-lg border transition duration-300 ease-in-out transform  hover:-translate-y-1 peer-checked:-translate-y-1 ${styles.inputCheck}`}
                     ></div>
-                    Test {i}
+                    Example {i}
                   </label>
                 </div>
               ))}
