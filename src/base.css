@@ -10,3 +10,13 @@
     -ms-overflow-style: none;
   }
 }
+
+@layer components {
+  .required-form div:has(input[required]) > label::before,
+  .required-form div:has(select[required]) > label::before,
+  .required-form div:has(textarea[required]) > label::before {
+    content: "*  ";
+    color: theme("colors.red.500");
+    margin-left: 0.25rem;
+  }
+}

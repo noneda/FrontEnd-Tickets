@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../Layout";
 import SystemApp from "../Pages/SystemApp";
-import Example from "../Pages/SystemApp/ExampleForm";
+import Form from "../Pages/SystemApp/ExampleForm";
 
 const Routes = createBrowserRouter([
   {
@@ -14,8 +14,8 @@ const Routes = createBrowserRouter([
         Component: SystemApp,
       },
       {
-        path: "Example",
-        Component: Example,
+        path: "form/:name",
+        Component: Form,
       },
     ],
   },
