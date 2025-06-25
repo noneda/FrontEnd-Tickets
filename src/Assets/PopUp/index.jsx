@@ -3,7 +3,7 @@ const PopUp = ({ styles, show, handle }) => {
     <section
       className={`${
         !show && "hidden"
-      } fixed w-full h-full top-0 right-0 z-40 bg-white/30 backdrop-blur-xs flex justify-center items-center`}
+      } fixed w-full h-[100vh] top-0 right-0 z-40 bg-white/30 backdrop-blur-xs flex justify-center items-center`}
     >
       <div className="w-64 bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-visible rounded-md">
         <div
@@ -55,7 +55,7 @@ const PopUp = ({ styles, show, handle }) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
         <button
-          className={`absolute -bottom-5 z-10 right-2.5 select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+          className={`absolute -bottom-5 z-10 right-2.5 select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
           type="submit"
           onClick={handle}
         >

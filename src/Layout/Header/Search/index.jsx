@@ -1,8 +1,11 @@
 import ResultHeader from "../Results";
+/*
+    TODO: this to show need a flex no hidden :P
+*/
 
 const HeaderSearch = () => {
   return (
-    <article className="relative h-auto  xl:w-full flex justify-center xl:justify-end">
+    <article className="hidden relative h-auto  xl:w-full justify-center xl:justify-end">
       <form className="text-sm mb-1 w-11/12 xl:w-auto" acceptCharset="utf-8">
         <input
           placeholder="Search..."

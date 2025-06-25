@@ -84,7 +84,7 @@ const Form = () => {
                     htmlFor={"hr-" + i}
                     class="flex flex-row items-center gap-2.5"
                   >
-                    <input id={"hr-" + i} type= "checkbox" class="peer hidden" />
+                    <input id={"hr-" + i} type="checkbox" class="peer hidden" />
                     <div
                       htmlFor={"hr-" + i}
                       class={`h-5 w-5 flex rounded-lg border transition duration-300 ease-in-out transform  hover:-translate-y-1 peer-checked:-translate-y-1 ${styles.inputCheck}`}
@@ -98,7 +98,7 @@ const Form = () => {
           <div class="group/little text-sm h-auto px-5 py-10 flex flex-col justify-center items-center rounded-xl  shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1">
             <button
               type="button"
-              class={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+              class={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all  duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none `}
               onClick={() => {
                 document.querySelector('input[type="file"]').click();
               }}
@@ -110,7 +110,7 @@ const Form = () => {
         </section>
 
         <button
-          className={`absolute -bottom-5 z-10 right-10 select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+          className={`absolute -bottom-5 z-10 right-10 select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
           type="submit"
         >
           Enviar
