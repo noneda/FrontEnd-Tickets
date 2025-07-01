@@ -5,9 +5,12 @@ import { RouterProvider } from "react-router-dom";
 
 import "./base.css";
 import Routes from "./Router";
+import ViewGlobalContext from "./Context";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={Routes} />
+    <ViewGlobalContext>
+      <RouterProvider router={Routes} />
+    </ViewGlobalContext>
   </StrictMode>
 );

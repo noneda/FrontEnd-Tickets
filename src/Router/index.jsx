@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../Layout";
-import SystemApp from "../Pages/SystemApp";
-import Form from "../Pages/SystemApp/Form";
+import SystemApp from "../Pages/System";
+import Form from "../Pages/System/Form";
+import DashBoard from "../App/Dashboard";
+import Login from "../Pages/Login";
 
 const Routes = createBrowserRouter([
   {
@@ -14,8 +16,16 @@ const Routes = createBrowserRouter([
         Component: SystemApp,
       },
       {
-        path: "form/:name",
+        path: "form",
         Component: Form,
+      },
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "dashboard",
+        Component: DashBoard,
       },
     ],
   },
