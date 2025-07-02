@@ -54,6 +54,8 @@ const HelpDesk = () => {
                 values={field.values}
                 styles={styles}
                 refObj={refs.current[field.id]}
+                inputType={field.inputType}
+                required={field.required}
               />
             );
           })}

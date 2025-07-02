@@ -3,28 +3,36 @@
     {
       "type": "TypeText",
       "id": "email",
-      "Question": "Ingresa correo electrónico"
+      "Question": "Ingresa correo electrónico",
+      "required": true,
+      "inputType": "email"
     },
     {
       "type": "TypeText",
       "id": "name",
-      "Question": "Nombres y Apellidos"
+      "Question": "Nombres y Apellidos",
+      "required": true,
+      "inputType": "text"
     },
     {
       "type": "TypeText",
       "id": "phone",
-      "Question": "Extensión o Celular"
+      "Question": "Extensión o Celular",
+      "required": true,
+      "inputType": "number"
     },
     {
       "type": "TypeSelect",
       "id": "department",
       "Question": "Secretaría o sede",
+      "required": true,
       "values": []
     },
     {
       "type": "TypeSelect",
       "id": "service",
       "Question": "¿Servicio a solicitar ?",
+      "required": true,
       "values": []
     }
   ]
