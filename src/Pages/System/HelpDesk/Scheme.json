@@ -2,25 +2,30 @@
   "Schema": [
     {
       "type": "TypeText",
-      "id": "name",
-      "Question": "¿Cuál es tu nombre?"
+      "id": "email",
+      "Question": "Ingresa correo electrónico"
     },
     {
-      "type": "TypeArea",
-      "id": "bio",
-      "Question": "Cuéntanos algo sobre ti"
+      "type": "TypeText",
+      "id": "name",
+      "Question": "Nombres y Apellidos"
+    },
+    {
+      "type": "TypeText",
+      "id": "phone",
+      "Question": "Extensión o Celular"
     },
     {
       "type": "TypeSelect",
-      "id": "country",
-      "Question": "¿En qué país vives?",
-      "values": ["Colombia", "México", "Argentina", "Chile"]
+      "id": "department",
+      "Question": "Secretaría o sede",
+      "values": []
     },
     {
-      "type": "TypeChoose",
-      "id": "interests",
-      "Question": "¿Qué temas te interesan?",
-      "values": ["Programación", "Diseño", "Matemáticas", "Física"]
+      "type": "TypeSelect",
+      "id": "service",
+      "Question": "¿Servicio a solicitar ?",
+      "values": []
     }
   ]
 }

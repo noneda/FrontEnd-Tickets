@@ -1,10 +1,11 @@
 import { useState, useCallback, useRef, useEffect, createRef } from "react";
 import { SectSystem, colorMap } from "../../../Utils/SystemApp";
 import { Schema } from "./Scheme.json";
+import { GetSecretariatForm, GetServicesForm } from "../../../Utils/Api/GET";
 
 const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
-
+  const [schema, setSchema] = useState([...Schema]);
   const refs = useRef({});
 
   const System = SectSystem.find((e) => e.name === "Mesa de Ayuda");
@@ -17,6 +18,11 @@ const useHelpDesk = () => {
         field.type === "TypeChoose" ? { current: [] } : { current: null };
     }
   });
+
+  useEffect(() => {
+    GetSecretariatForm(setSchema);
+    GetServicesForm(setSchema);
+  }, []);
 
   const handlePopUp = useCallback(() => {
     setPopUp(!isPopUp);
@@ -41,7 +47,7 @@ const useHelpDesk = () => {
     console.log("Formulario enviado:", formData);
   };
 
-  return [isPopUp, handlePopUp, handleForm, System, styles, Schema, refs];
+  return [isPopUp, handlePopUp, handleForm, System, styles, schema, refs];
 };
 
 export default useHelpDesk;
