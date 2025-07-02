@@ -1,0 +1,26 @@
+{
+  "Schema": [
+    {
+      "type": "TypeText",
+      "id": "name",
+      "Question": "¿Cuál es tu nombre?"
+    },
+    {
+      "type": "TypeArea",
+      "id": "bio",
+      "Question": "Cuéntanos algo sobre ti"
+    },
+    {
+      "type": "TypeSelect",
+      "id": "country",
+      "Question": "¿En qué país vives?",
+      "values": ["Colombia", "México", "Argentina", "Chile"]
+    },
+    {
+      "type": "TypeChoose",
+      "id": "interests",
+      "Question": "¿Qué temas te interesan?",
+      "values": ["Programación", "Diseño", "Matemáticas", "Física"]
+    }
+  ]
+}

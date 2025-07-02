@@ -1,14 +1,8 @@
-import { useParams } from "react-router-dom";
-import { colorMap, SectSystem } from "../../../Utils/SystemApp";
-
 import PopUp from "../../../Assets/PopUp";
 import FormState from "./hook";
 
 const Form = () => {
-  const { name } = useParams();
-  const System = SectSystem.find((e) => e.name === name);
-  const styles = colorMap[System.color] || colorMap.white;
-  const [isPopUp, handlePopUp, handleForm] = FormState();
+  const [isPopUp, handlePopUp, handleForm, styles, System] = FormState();
 
   return (
     <>

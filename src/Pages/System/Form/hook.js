@@ -1,7 +1,12 @@
 import { useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { colorMap, SectSystem } from "../../../Utils/SystemApp";
 
 const FormState = () => {
   const [isPopUp, setPopUp] = useState(false);
+  const { name } = useParams();
+  const System = SectSystem.find((e) => e.name === name);
+  const styles = colorMap[System.color] || colorMap.white;
 
   const handlePopUp = useCallback(() => {
     setPopUp(!isPopUp);
@@ -12,7 +17,7 @@ const FormState = () => {
     handlePopUp();
   };
 
-  return [isPopUp, handlePopUp, handleForm];
+  return [isPopUp, handlePopUp, handleForm, styles, System];
 };
 
 export default FormState;
