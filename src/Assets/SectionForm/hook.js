@@ -2,41 +2,43 @@ import { useState } from "react";
 import { getEmailBySuggest } from "../../Utils/Api/GET";
 
 export const useEmailSuggestion = (refObj) => {
-  const [suggestions, setSuggestions] = useState("");
-  const [ghost, setGhost] = useState("");
+  const [suggestion, setSuggestion] = useState("");
+  const [ghost, setGhost] = useState(false);
 
   const handleChange = async () => {
     const value = refObj.current?.value?.trim();
     if (!value || value.length < 2) {
-      setSuggestions("");
-      setGhost("");
+      setSuggestion("");
+      setGhost(false);
       return;
     }
 
     const matches = await getEmailBySuggest(value);
-    setSuggestions(matches);
-    setGhost(matches || "");
+    setSuggestion(matches);
+    setGhost(true);
+    console.log(suggestion);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Tab" && ghost) {
       e.preventDefault();
       if (refObj.current) {
-        refObj.current.value = ghost;
-        setSuggestions([]);
-        setGhost("");
+        refObj.current.value = suggestion;
+        setSuggestion("");
+        setGhost(false);
       }
     }
   };
 
   const handleAutocomplete = () => {
     if (ghost && refObj.current) {
-      refObj.current.value = ghost;
+      refObj.current.value = suggestion;
+      setGhost(false);
     }
   };
 
   return {
-    suggestions,
+    suggestion,
     ghost,
     handleChange,
     handleKeyDown,

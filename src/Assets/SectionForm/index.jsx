@@ -1,8 +1,13 @@
 import { useEmailSuggestion } from "./hook";
 const ComponentsInput = {
   TypeEmail: ({ id, Question, styles, refObj, required }) => {
-    const { ghost, handleChange, handleKeyDown, handleAutocomplete } =
-      useEmailSuggestion(refObj);
+    const {
+      suggestion,
+      ghost,
+      handleChange,
+      handleKeyDown,
+      handleAutocomplete,
+    } = useEmailSuggestion(refObj);
 
     return (
       <div
@@ -26,14 +31,14 @@ const ComponentsInput = {
         {ghost && (
           <>
             <p className="text-gray-400 text-sm pl-1">
-              Sugerencia: <span className="font-medium">{ghost}</span>
+              Sugerencia: <span className="font-medium">{suggestion}</span>
             </p>
             <button
               type="button"
               className="sm:hidden mt-2 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg shadow-md hover:bg-blue-600 transition"
               onClick={handleAutocomplete}
             >
-              Autocompletar correo
+              Autocompletar
             </button>
           </>
         )}
