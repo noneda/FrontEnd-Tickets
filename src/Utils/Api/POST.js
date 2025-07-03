@@ -27,3 +27,16 @@ export const PostLogin = async (setToken) => {
     }
   }
 };
+
+export const sendTicket = async (send = {}) => {
+  try {
+    const { data, status } = await API.post("/api/ticket/public/", {
+      ticket: send,
+    });
+    console.log(data, status);
+  } catch (error) {
+    const status = err.response?.status;
+    alert(`Error desconocido${status ? ` (${status})` : ""}`);
+    console.error("Error with", err.message);
+  }
+};

@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef, useEffect, createRef } from "react";
 import { SectSystem, colorMap } from "../../../Utils/SystemApp";
 import { Schema } from "./Scheme.json";
-import { GetSecretariatForm, GetServicesForm } from "../../../Utils/Api/GET";
+import { getBasicData } from "../../../Utils/Api/GET";
+import { sendTicket } from "../../../Utils/Api/POST";
 
 const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
@@ -20,8 +21,7 @@ const useHelpDesk = () => {
   });
 
   useEffect(() => {
-    GetSecretariatForm(setSchema);
-    GetServicesForm(setSchema);
+    getBasicData(setSchema);
   }, []);
 
   const handlePopUp = useCallback(() => {
@@ -44,7 +44,7 @@ const useHelpDesk = () => {
       }
     });
 
-    console.log("Formulario enviado:", formData);
+    sendTicket(formData);
   };
 
   return [isPopUp, handlePopUp, handleForm, System, styles, schema, refs];

@@ -1,43 +1,26 @@
 import { API } from "../../Shared";
 
-export const GetSecretariatForm = async (setSchema) => {
+export const getBasicData = async (setSchema) => {
   try {
-    const { data, status } = await API("/api/get/secretariat/");
+    const { data, status } = await API("api/get/basics/");
     if (status === 200) {
-      const onlyNames = data.map((item) => item.name);
-      setSchema((prev) =>
-        prev.map((field) =>
-          field.id === "department" ? { ...field, values: onlyNames } : field
-        )
-      );
-    }
-  } catch (err) {
-    if (err.response) {
-      const status = err.response.status;
-      alert(`Error desconocido (${status})`);
-    } else {
-      console.error("Error with", err.message);
-    }
-  }
-};
+      const onlyNamesServices = data.services.map((item) => item.name);
+      const onlyNamesSecretariat = data.secretariats.map((item) => item.name);
 
-export const GetServicesForm = async (setSchema) => {
-  try {
-    const { data, status } = await API("/api/get/services/");
-    if (status === 200) {
-      const onlyNames = data.map((item) => item.name);
       setSchema((prev) =>
-        prev.map((field) =>
-          field.id === "service" ? { ...field, values: onlyNames } : field
-        )
+        prev.map((field) => {
+          if (field.id === "service") {
+            return { ...field, values: onlyNamesServices };
+          } else if (field.id === "department") {
+            return { ...field, values: onlyNamesSecretariat };
+          }
+          return field;
+        })
       );
     }
   } catch (err) {
-    if (err.response) {
-      const status = err.response.status;
-      alert(`Error desconocido (${status})`);
-    } else {
-      console.error("Error with", err.message);
-    }
+    const status = err.response?.status;
+    alert(`Error desconocido${status ? ` (${status})` : ""}`);
+    console.error("Error with", err.message);
   }
 };

@@ -3,5 +3,5 @@ import config from "../Env";
 
 export const API = axios.create({
   baseURL: config.API,
-  timeout: 1500,
+  timeout: 500,
 });
