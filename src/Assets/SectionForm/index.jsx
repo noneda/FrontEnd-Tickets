@@ -1,4 +1,45 @@
+import { useEmailSuggestion } from "./hook";
 const ComponentsInput = {
+  TypeEmail: ({ id, Question, styles, refObj, required }) => {
+    const { ghost, handleChange, handleKeyDown, handleAutocomplete } =
+      useEmailSuggestion(refObj);
+
+    return (
+      <div
+        className="group/little h-auto px-5 py-10 flex flex-col justify-center items-start rounded-xl shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1"
+        key={"TypeEmail-" + id}
+      >
+        <label htmlFor={"Email" + id} className={`text-xl ${styles.text}`}>
+          {Question}
+        </label>
+
+        <input
+          type="email"
+          id={"Email" + id}
+          ref={(el) => (refObj.current = el)}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          required={required}
+          className={`w-11/12 border rounded-lg py-1 shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 hover:shadow-lg ${styles.inputText} pl-4 text-gray-600`}
+        />
+
+        {ghost && (
+          <>
+            <p className="text-gray-400 text-sm pl-1">
+              Sugerencia: <span className="font-medium">{ghost}</span>
+            </p>
+            <button
+              type="button"
+              className="sm:hidden mt-2 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg shadow-md hover:bg-blue-600 transition"
+              onClick={handleAutocomplete}
+            >
+              Autocompletar correo
+            </button>
+          </>
+        )}
+      </div>
+    );
+  },
   TypeText: ({ id, Question, styles, refObj, inputType, required }) => (
     <div
       className="group/little h-30 px-5 py-10 flex flex-col justify-center items-baseline rounded-xl shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1"

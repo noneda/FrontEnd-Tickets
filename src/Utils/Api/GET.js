@@ -24,3 +24,35 @@ export const getBasicData = async (setSchema) => {
     console.error("Error with", err.message);
   }
 };
+
+export const getEmailBySuggest = async (suggest) => {
+  try {
+    const { data, status } = await API.get(
+      `/api/get/suggest/?email=${suggest}`
+    );
+
+    if (status === 200) {
+      return data.suggestions || "";
+    }
+  } catch (err) {
+    if (err.response?.status === 404) {
+      console.warn("Email not found");
+      return [];
+    }
+
+    console.error("Error during suggestion:", err.message);
+    return [];
+  }
+};
+
+export const getUserByEmail = async (email) => {
+  try {
+    const { data, status } = await API.get(
+      `/api/get/user-by-email/?email=${email}`
+    );
+    if (status === 200) return data;
+  } catch (err) {
+    console.error("Error fetching user by email:", err.message);
+  }
+  return null;
+};
