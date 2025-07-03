@@ -7,6 +7,7 @@ import { sendTicket } from "../../../Utils/Api/POST";
 const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
   const [schema, setSchema] = useState([...Schema]);
+  const [autocomplete, setAutocomplete] = useState(false);
   const refs = useRef({});
 
   const System = SectSystem.find((e) => e.name === "Mesa de Ayuda");
@@ -24,7 +25,28 @@ const useHelpDesk = () => {
     getBasicData(setSchema);
   }, []);
 
+  const handleAutocomplete = async () => {
+    if (!autocomplete) return;
 
+    const email = refs.current?.email?.current?.value;
+    console.log(email);
+
+    const userData = await getUserByEmail(email);
+    if (!userData) return;
+
+    const keysToUpdate = ["name", "phone", "department"];
+
+    keysToUpdate.forEach((key) => {
+      if (userData[key] !== undefined && refs.current[key]) {
+        refs.current[key].current.value = userData[key];
+      }
+    });
+    setAutocomplete(false);
+  };
+
+  useEffect(() => {
+    handleAutocomplete();
+  }, [autocomplete]);
 
   const handlePopUp = useCallback(() => {
     setPopUp(!isPopUp);
@@ -49,7 +71,16 @@ const useHelpDesk = () => {
     sendTicket(formData);
   };
 
-  return [isPopUp, handlePopUp, handleForm, System, styles, schema, refs];
+  return [
+    isPopUp,
+    handlePopUp,
+    handleForm,
+    System,
+    styles,
+    schema,
+    refs,
+    setAutocomplete,
+  ];
 };
 
 export default useHelpDesk;

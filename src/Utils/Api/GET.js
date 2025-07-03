@@ -47,9 +47,7 @@ export const getEmailBySuggest = async (suggest) => {
 
 export const getUserByEmail = async (email) => {
   try {
-    const { data, status } = await API.get(
-      `/api/get/user-by-email/?email=${email}`
-    );
+    const { data, status } = await API.get(`/api/get/user/?email=${email}`);
     if (status === 200) return data;
   } catch (err) {
     console.error("Error fetching user by email:", err.message);

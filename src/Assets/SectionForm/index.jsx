@@ -1,13 +1,13 @@
 import { useEmailSuggestion } from "./hook";
 const ComponentsInput = {
-  TypeEmail: ({ id, Question, styles, refObj, required }) => {
+  TypeEmail: ({ id, Question, styles, refObj, required, autocomplete }) => {
     const {
       suggestion,
       ghost,
       handleChange,
       handleKeyDown,
       handleAutocomplete,
-    } = useEmailSuggestion(refObj);
+    } = useEmailSuggestion(refObj, autocomplete);
 
     return (
       <div

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getEmailBySuggest } from "../../Utils/Api/GET";
 
-export const useEmailSuggestion = (refObj) => {
+export const useEmailSuggestion = (refObj, autocomplete) => {
   const [suggestion, setSuggestion] = useState("");
   const [ghost, setGhost] = useState(false);
 
@@ -16,7 +16,6 @@ export const useEmailSuggestion = (refObj) => {
     const matches = await getEmailBySuggest(value);
     setSuggestion(matches);
     setGhost(true);
-    console.log(suggestion);
   };
 
   const handleKeyDown = (e) => {
@@ -26,6 +25,7 @@ export const useEmailSuggestion = (refObj) => {
         refObj.current.value = suggestion;
         setSuggestion("");
         setGhost(false);
+        autocomplete(true);
       }
     }
   };
@@ -34,6 +34,7 @@ export const useEmailSuggestion = (refObj) => {
     if (ghost && refObj.current) {
       refObj.current.value = suggestion;
       setGhost(false);
+      autocomplete(true);
     }
   };
 

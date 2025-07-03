@@ -3,8 +3,16 @@ import useHelpDesk from "./hook";
 import ComponentsInput from "../../../Assets/SectionForm";
 
 const HelpDesk = () => {
-  const [isPopUp, handlePopUp, handleForm, System, styles, Schema, refs] =
-    useHelpDesk();
+  const [
+    isPopUp,
+    handlePopUp,
+    handleForm,
+    System,
+    styles,
+    Schema,
+    refs,
+    setAutocomplete,
+  ] = useHelpDesk();
 
   return (
     <>
@@ -55,6 +63,7 @@ const HelpDesk = () => {
                 styles={styles}
                 refObj={refs.current[field.id]}
                 inputType={field.inputType}
+                autocomplete={setAutocomplete}
                 required={field.required}
               />
             );
