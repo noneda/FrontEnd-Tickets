@@ -1,4 +1,4 @@
-import { useEmailSuggestion } from "./hook";
+import { useEmailSuggestion, useTypeArchive } from "./hook";
 const ComponentsInput = {
   TypeEmail: ({ id, Question, styles, refObj, required, autocomplete }) => {
     const {
@@ -140,6 +140,38 @@ const ComponentsInput = {
       </fieldset>
     </div>
   ),
+  TypeArchive: ({ styles, refObj }) => {
+    const [filesInfo, handleFileChange] = useTypeArchive(refObj);
+    return (
+      <div className="group/little text-sm h-auto px-5 py-10 flex flex-col justify-center items-center rounded-xl  shadow-2xl/20 w-full hover:shadow-xl/20 gap-2 transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <button
+          type="button"
+          className={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all  duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none `}
+          onClick={() => refObj.current?.click()}
+        >
+          Subir Archivos
+        </button>
+        <input
+          type="file"
+          name="archives"
+          ref={refObj}
+          onChange={handleFileChange}
+          className="hidden"
+          multiple
+        />
+        {filesInfo.length > 0 && (
+          <div className="mt-2 text-md text-left text-gray-700">
+            <p className="font-bold mb-1">Archivos seleccionados:</p>
+            <ul className="list-disc list-inside">
+              {filesInfo.map((info, idx) => (
+                <li key={idx}>{info}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    );
+  },
 };
 
 export default ComponentsInput;

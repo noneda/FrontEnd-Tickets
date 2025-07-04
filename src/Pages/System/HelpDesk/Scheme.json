@@ -22,13 +22,6 @@
       "inputType": "number"
     },
     {
-      "type": "TypeChoose",
-      "id": "choose",
-      "Question": "¿Servicio a solicitar ?",
-      "required": true,
-      "values": ["Uno", "Dos"]
-    },
-    {
       "type": "TypeSelect",
       "id": "department",
       "Question": "Secretaría o sede",
@@ -36,11 +29,18 @@
       "values": []
     },
     {
-      "type": "TypeSelect",
-      "id": "service",
+      "type": "TypeChoose",
+      "id": "choose",
       "Question": "¿Servicio a solicitar ?",
       "required": true,
-      "values": []
+      "values": ["Uno", "Dos"]
+    },
+
+    {
+      "type": "TypeArea",
+      "id": "observation",
+      "Question": "Escriba sus Observaciones",
+      "inputType": "text"
     }
   ]
 }

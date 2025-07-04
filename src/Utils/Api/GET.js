@@ -37,7 +37,7 @@ export const getEmailBySuggest = async (suggest) => {
   } catch (err) {
     if (err.response?.status === 404) {
       console.warn("Email not found");
-      return "";
+      return "No se encontró el correo";
     }
 
     console.error("Error during suggestion:", err.message);

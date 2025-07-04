@@ -8,7 +8,10 @@ const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
   const [schema, setSchema] = useState([...Schema]);
   const [autocomplete, setAutocomplete] = useState(false);
+  const [isUserId, setUserId] = useState(0);
   const refs = useRef({});
+  const typeTicket = "Mesa de Ayuda";
+  const keysToUpdate = ["name", "phone", "department"];
 
   const System = SectSystem.find((e) => e.name === "Mesa de Ayuda");
   const styles = colorMap[System.color];
@@ -29,12 +32,11 @@ const useHelpDesk = () => {
     if (!autocomplete) return;
 
     const email = refs.current?.email?.current?.value;
-    console.log(email);
 
     const userData = await getUserByEmail(email);
     if (!userData) return;
 
-    const keysToUpdate = ["name", "phone", "department"];
+    setUserId(userData.id);
 
     keysToUpdate.forEach((key) => {
       if (userData[key] !== undefined && refs.current[key]) {
@@ -58,7 +60,7 @@ const useHelpDesk = () => {
 
     Schema.forEach((field) => {
       const ref = refs.current[field.id];
-
+      if (keysToUpdate.includes(field.id)) return;
       if (field.type === "TypeChoose") {
         formData[field.id] = ref.current
           .filter((el) => el?.checked)
@@ -67,8 +69,10 @@ const useHelpDesk = () => {
         formData[field.id] = ref.current?.value || "";
       }
     });
-
-    sendTicket(formData);
+    // TODO: More later
+    // refs.current?.service?.current?.value
+    const secretariat = refs.current.department.current.value;
+    sendTicket(formData, typeTicket, isUserId, secretariat);
   };
 
   return [

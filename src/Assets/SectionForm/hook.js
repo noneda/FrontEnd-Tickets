@@ -46,3 +46,28 @@ export const useEmailSuggestion = (refObj, autocomplete) => {
     handleAutocomplete,
   };
 };
+
+export const useTypeArchive = (refObj) => {
+  const [filesInfo, setFilesInfo] = useState([]);
+
+  const MAX_FILE_SIZE_MB = 5;
+  const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+  const handleFileChange = () => {
+    const files = Array.from(refObj.current.files);
+
+    const validFiles = files.filter((file) => file.size <= MAX_FILE_SIZE);
+
+    if (validFiles.length !== files.length) {
+      alert(`Solo se permiten archivos de hasta ${MAX_FILE_SIZE_MB} MB`);
+    }
+
+    setFilesInfo(
+      validFiles.map(
+        (file) => `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`
+      )
+    );
+  };
+
+  return [filesInfo, handleFileChange];
+};

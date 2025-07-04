@@ -28,13 +28,15 @@ export const PostLogin = async (setToken) => {
   }
 };
 
-export const sendTicket = async (send = {}) => {
+export const sendTicket = async (send, type, idUser, secretariat) => {
   try {
     const { data, status } = await API.post("/api/ticket/public/", {
       ticket: send,
+      typeTicket: type,
+      user: idUser,
     });
     console.log(data, status);
-  } catch (error) {
+  } catch (err) {
     const status = err.response?.status;
     alert(`Error desconocido${status ? ` (${status})` : ""}`);
     console.error("Error with", err.message);
