@@ -29,13 +29,23 @@
       "values": []
     },
     {
+      "type": "TypeSelect",
+      "id": "service",
+      "Question": "Elija su servicio a solicitar",
+      "required": true,
+      "values": []
+    },
+    {
       "type": "TypeChoose",
       "id": "choose",
       "Question": "¿Servicio a solicitar ?",
       "required": true,
       "values": ["Uno", "Dos"]
     },
-
+    {
+      "type": "TypeArchive",
+      "id": "archives"
+    },
     {
       "type": "TypeArea",
       "id": "observation",

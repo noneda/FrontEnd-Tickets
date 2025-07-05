@@ -2,16 +2,18 @@ import { useState, useCallback, useRef, useEffect, createRef } from "react";
 import { SectSystem, colorMap } from "../../../Utils/SystemApp";
 import { Schema } from "./Scheme.json";
 import { getBasicData, getUserByEmail } from "../../../Utils/Api/GET";
-import { sendTicket } from "../../../Utils/Api/POST";
+import { sendTicket, sendDocuments } from "../../../Utils/Api/POST";
 
 const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
   const [schema, setSchema] = useState([...Schema]);
   const [autocomplete, setAutocomplete] = useState(false);
-  const [isUserId, setUserId] = useState(0);
+
+  const [isTicket, setTicket] = useState({});
+
   const refs = useRef({});
   const typeTicket = "Mesa de Ayuda";
-  const keysToUpdate = ["name", "phone", "department"];
+  const keysToUpdate = ["name", "phone", "department", "email"];
 
   const System = SectSystem.find((e) => e.name === "Mesa de Ayuda");
   const styles = colorMap[System.color];
@@ -36,8 +38,6 @@ const useHelpDesk = () => {
     const userData = await getUserByEmail(email);
     if (!userData) return;
 
-    setUserId(userData.id);
-
     keysToUpdate.forEach((key) => {
       if (userData[key] !== undefined && refs.current[key]) {
         refs.current[key].current.value = userData[key];
@@ -56,23 +56,29 @@ const useHelpDesk = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    const formData = {};
+    const dataTicket = {};
+    const documentsData = new FormData();
 
     Schema.forEach((field) => {
       const ref = refs.current[field.id];
       if (keysToUpdate.includes(field.id)) return;
-      if (field.type === "TypeChoose") {
-        formData[field.id] = ref.current
+      if (field.type === "TypeArchive") {
+        [...ref.current.files].forEach((file) => {
+          documentsData.append("documents", file);
+        });
+      } else if (field.type === "TypeChoose") {
+        dataTicket[field.id] = ref.current
           .filter((el) => el?.checked)
           .map((el) => el.value);
       } else {
-        formData[field.id] = ref.current?.value || "";
+        dataTicket[field.id] = ref.current?.value || "";
       }
     });
-    // TODO: More later
-    // refs.current?.service?.current?.value
     const secretariat = refs.current.department.current.value;
-    sendTicket(formData, typeTicket, isUserId, secretariat);
+    documentsData.append("secretariat", secretariat);
+    documentsData.append("ticket", isTicket.id);
+    const email = refs.current?.email?.current?.value;
+    sendTicket(dataTicket, typeTicket, email);
   };
 
   return [
