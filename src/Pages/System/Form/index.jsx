@@ -1,6 +1,6 @@
-import PopUp from "../../../Assets/PopUp";
+import PopUp from "@/Assets/PopUp";
 import useHelpDesk from "./hook";
-import ComponentsInput from "../../../Assets/SectionForm";
+import ComponentsInput from "@/Assets/SectionForm";
 
 const HelpDesk = () => {
   const [

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { colorMap, SectSystem } from "../../../Utils/SystemApp";
+import { colorMap, SectSystem } from "@/Utils/SystemApp";
 
 const FormState = () => {
   const [isPopUp, setPopUp] = useState(false);

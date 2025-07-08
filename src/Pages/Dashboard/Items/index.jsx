@@ -1,6 +1,6 @@
-import { SectSystem, colorMap } from "../../Utils/SystemApp";
+import { SectSystem, colorMap } from "@/Utils/SystemApp";
 
-const DashBoard = () => {
+const ItemsDashBoard = () => {
   return (
     <section className="relative w-full h-auto flex flex-col justify-center items-center gap-5">
       {SectSystem.map((element, index) => {
@@ -29,4 +29,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default ItemsDashBoard;

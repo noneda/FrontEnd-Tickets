@@ -1,4 +1,4 @@
-import PopUp from "../../../Assets/PopUp";
+import PopUp from "@/Assets/PopUp";
 import FormState from "./hook";
 
 const Form = () => {

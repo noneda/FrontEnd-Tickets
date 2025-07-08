@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { SectSystem, colorMap } from "../../../Utils/SystemApp";
-import { getBasicData, getUserByEmail } from "../../../Utils/Api/GET";
-import { sendTicket, sendDocuments } from "../../../Utils/Api/POST";
+import { SectSystem, colorMap } from "@/Utils/SystemApp";
+import { getBasicData, getUserByEmail } from "@/Utils/Api/GET";
+import { sendTicket, sendDocuments } from "@/Utils/Api/POST";
 
 const useHelpDesk = () => {
   const refs = useRef({});

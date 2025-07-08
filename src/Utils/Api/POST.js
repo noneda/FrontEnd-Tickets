@@ -1,4 +1,4 @@
-import { API } from "../../Shared";
+import { API } from "@/Shared";
 
 export const PostLogin = async (setToken) => {
   try {

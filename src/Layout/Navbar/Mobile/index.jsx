@@ -1,4 +1,4 @@
-import { SectionNav } from "../../../Utils/NavBar";
+import { SectionNav } from "@/Utils/NavBar";
 
 const NavBarMobile = () => {
   return (

@@ -1,4 +1,4 @@
-import { SectSystem, colorMap } from "../../Utils/SystemApp";
+import { SectSystem, colorMap } from "@/Utils/SystemApp";
 import { useNavigate } from "react-router-dom";
 
 const SystemApp = () => {
