@@ -1,0 +1,56 @@
+{
+  "Schema": [
+    {
+      "type": "TypeEmail",
+      "id": "email",
+      "Question": "Ingresa correo electrónico",
+      "required": true,
+      "inputType": "email"
+    },
+    {
+      "type": "TypeText",
+      "id": "name",
+      "Question": "Nombres y Apellidos",
+      "required": true,
+      "inputType": "text"
+    },
+    {
+      "type": "TypeText",
+      "id": "phone",
+      "Question": "Extensión o Celular",
+      "required": true,
+      "inputType": "number"
+    },
+    {
+      "type": "TypeSelect",
+      "id": "department",
+      "Question": "Secretaría o sede",
+      "required": true,
+      "values": []
+    },
+    {
+      "type": "TypeSelect",
+      "id": "service",
+      "Question": "Elija su servicio a solicitar",
+      "required": true,
+      "values": []
+    },
+    {
+      "type": "TypeChoose",
+      "id": "choose",
+      "Question": "¿Servicio a solicitar ?",
+      "required": true,
+      "values": ["Uno", "Dos"]
+    },
+    {
+      "type": "TypeArchive",
+      "id": "archives"
+    },
+    {
+      "type": "TypeArea",
+      "id": "observation",
+      "Question": "Escriba sus Observaciones",
+      "inputType": "text"
+    }
+  ]
+}

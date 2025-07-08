@@ -1,24 +1,27 @@
 export const SectSystem = [
   {
     name: "Mesa de Ayuda",
+    param: "HelpDesk",
     color: "purple",
     img: "/undraw_hello_ccwj.svg",
     text: "Solicitud de Soporte Técnico <br/> Bienvenido al formulario de solicitud de soporte técnico de la Alcaldía de Cota. Este formulario está diseñado para facilitar el proceso de reporte y atención de cualquier inconveniente técnico que puedas experimentar dentro de nuestra entidad. Por favor, completa el siguiente formulario con la",
-    link: "/mesa-de-ayuda",
+    link: "/form/HelpDesk",
   },
   {
     name: "Pagina Web",
+    param: "WebPage",
     color: "green",
     img: "/undraw_onboarding_wkl7.svg",
     text: "",
-    link: "",
+    link: "/form/WebPage",
   },
   {
     name: "Correos y Usuarios",
+    param: "EmailsUsers",
     color: "blue",
     img: "/undraw_people_ka7y.svg",
     text: "",
-    link: "",
+    link: "form/EmailsUsers",
   },
 ];
 

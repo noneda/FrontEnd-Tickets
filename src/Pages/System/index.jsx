@@ -1,4 +1,3 @@
-// Components/SystemApp.jsx
 import { SectSystem, colorMap } from "../../Utils/SystemApp";
 import { useNavigate } from "react-router-dom";
 
