@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect, createRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { SectSystem, colorMap } from "../../../Utils/SystemApp";
 import { Schema } from "./Scheme.json";
 import { getBasicData, getUserByEmail } from "../../../Utils/Api/GET";
@@ -36,13 +36,14 @@ const useHelpDesk = () => {
     const email = refs.current?.email?.current?.value;
 
     const userData = await getUserByEmail(email);
-    if (!userData) return;
 
+    if (!userData) return;
     keysToUpdate.forEach((key) => {
       if (userData[key] !== undefined && refs.current[key]) {
         refs.current[key].current.value = userData[key];
       }
     });
+
     setAutocomplete(false);
   };
 
@@ -54,8 +55,7 @@ const useHelpDesk = () => {
     setPopUp(!isPopUp);
   }, [isPopUp]);
 
-  const handleForm = (e) => {
-    e.preventDefault();
+  const sendData = () => {
     const dataTicket = {};
     const documentsData = new FormData();
 
@@ -74,11 +74,21 @@ const useHelpDesk = () => {
         dataTicket[field.id] = ref.current?.value || "";
       }
     });
-    const secretariat = refs.current.department.current.value;
-    documentsData.append("secretariat", secretariat);
-    documentsData.append("ticket", isTicket.id);
+
     const email = refs.current?.email?.current?.value;
-    sendTicket(dataTicket, typeTicket, email);
+    const secretariat = refs.current.department.current.value;
+    sendTicket(dataTicket, typeTicket, email, setTicket).then((ticket) => {
+      if (!ticket?.id) return alert("No se generó el ticket correctamente");
+      documentsData.append("secretariat", secretariat);
+      documentsData.append("ticket", ticket.id);
+      sendDocuments(documentsData, handlePopUp);
+    });
+  };
+
+  const handleForm = (e) => {
+    setTicket({});
+    e.preventDefault();
+    sendData();
   };
 
   return [
@@ -90,6 +100,7 @@ const useHelpDesk = () => {
     schema,
     refs,
     setAutocomplete,
+    isTicket,
   ];
 };
 

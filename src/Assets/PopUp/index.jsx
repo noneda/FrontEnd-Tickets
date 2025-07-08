@@ -1,4 +1,4 @@
-const PopUp = ({ styles, show, handle }) => {
+const PopUp = ({ styles, show, handle, isTicket }) => {
   return (
     <section
       className={`${
@@ -7,9 +7,11 @@ const PopUp = ({ styles, show, handle }) => {
     >
       <div className="w-64 bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-visible rounded-md">
         <div
-          className={`w-12 h-10 rounded-md  absolute -right-1 -top-2 ${styles.bgGradient}`}
+          className={`w-24 h-10 rounded-md  absolute -right-1 -top-2 ${styles.bgGradient}`}
         >
-          <p className="absolute right-2.5 text-white text-2xl">01</p>
+          <p className="absolute right-2.5 text-white text-2xl">
+            {isTicket.code}
+          </p>
         </div>
         <div className="w-12">
           <svg
@@ -52,7 +54,7 @@ const PopUp = ({ styles, show, handle }) => {
         </div>
         <h1 className="font-bold text-xl">Ticket</h1>
         <p className="text-sm text-zinc-500 leading-6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Tu ticked a sido creado: <br />A las {isTicket.createTime}
         </p>
         <button
           className={`absolute -bottom-5 z-10 right-2.5 select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}

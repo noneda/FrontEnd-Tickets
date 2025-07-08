@@ -12,11 +12,17 @@ const HelpDesk = () => {
     Schema,
     refs,
     setAutocomplete,
+    isTicket,
   ] = useHelpDesk();
 
   return (
     <>
-      <PopUp styles={styles} show={isPopUp} handle={handlePopUp} />
+      <PopUp
+        styles={styles}
+        show={isPopUp}
+        handle={handlePopUp}
+        isTicket={isTicket}
+      />
       <form
         onSubmit={handleForm}
         className=" relative flex flex-col justify-center items-center gap-10 w-100"

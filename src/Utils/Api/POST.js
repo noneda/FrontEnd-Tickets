@@ -8,7 +8,6 @@ export const PostLogin = async (setToken) => {
     });
 
     if (status === 200) {
-      console.log("Token recibido:", data);
       setToken(data.token);
     }
   } catch (err) {
@@ -28,20 +27,18 @@ export const PostLogin = async (setToken) => {
   }
 };
 
-export const sendTicket = async (send, type, email) => {
+export const sendTicket = async (send, type, email, setTicket) => {
   try {
-    console.log({
-      ticket: send,
-      typeTicket: type,
-      user: email,
-    });
-
     const { data, status } = await API.post("/api/ticket/public/", {
       ticket: send,
       typeTicket: type,
       user: email,
     });
-    console.log(data, status);
+
+    if (status === 200) {
+      setTicket(data);
+      return data;
+    }
   } catch (err) {
     const status = err.response?.status;
     alert(`Error desconocido${status ? ` (${status})` : ""}`);
@@ -49,10 +46,12 @@ export const sendTicket = async (send, type, email) => {
   }
 };
 
-export const sendDocuments = async (documents) => {
+export const sendDocuments = async (documentsData, handlePopUp) => {
   try {
-    const { data, status } = await API.post("/api/documents/send/", documents);
-    console.log(data, status);
+    const { status } = await API.post("/api/documents/send/", documentsData);
+    if (status === 200) {
+      handlePopUp();
+    }
   } catch (err) {
     const status = err.response?.status;
     alert(`Error desconocido${status ? ` (${status})` : ""}`);
