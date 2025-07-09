@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <Header />
       {/* <NavBar /> */}
-      <main className="py-20 px-10 w-full h-auto flex flex-col justify-center items-center">
+      <main className="pb-20 px-10 w-full h-auto flex flex-col justify-center items-center">
         <Outlet />
       </main>
       <Footer />

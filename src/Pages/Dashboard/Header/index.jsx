@@ -1,9 +1,21 @@
-const HeaderDashboard = () => {
+import { useHeaderDashboard } from "./hook";
+
+const HeaderDashboard = ({ refCalendar }) => {
+  const [dateDisplay, handleCalendar, onChangeHandleCalendar] =
+    useHeaderDashboard({ refCalendar });
+
   return (
     <div className="flex flex-row w-full gap-2 items-center justify-between">
       <section className="flex flex-row gap-6">
-        <h2 className="text-gray-600 font-bold text-md">dd/mm/yy</h2>
-        <button>
+        <h2 className="text-gray-600 font-bold text-md">{dateDisplay}</h2>
+        <input
+          type="date"
+          className="hidden absolute"
+          ref={refCalendar}
+          name="calendar"
+          onChange={onChangeHandleCalendar}
+        />
+        <button onClick={handleCalendar}>
           <svg
             className="size-6 right-[10%] xl:right-3 text-gray-500"
             viewBox="0 0 24 24"

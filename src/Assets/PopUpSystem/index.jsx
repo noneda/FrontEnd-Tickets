@@ -1,4 +1,4 @@
-const PopUp = ({ styles, show, handle, isTicket }) => {
+const PopUpSystem = ({ styles, show, handle, isTicket }) => {
   return (
     <section
       className={`${
@@ -68,4 +68,4 @@ const PopUp = ({ styles, show, handle, isTicket }) => {
   );
 };
 
-export default PopUp;
+export default PopUpSystem;

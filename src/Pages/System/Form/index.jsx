@@ -1,4 +1,4 @@
-import PopUp from "@/Assets/PopUp";
+import PopUpSystem from "@/Assets/PopUpSystem";
 import useHelpDesk from "./hook";
 import ComponentsInput from "@/Assets/SectionForm";
 
@@ -17,7 +17,7 @@ const HelpDesk = () => {
 
   return (
     <>
-      <PopUp
+      <PopUpSystem
         styles={styles}
         show={isPopUp}
         handle={handlePopUp}
