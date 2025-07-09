@@ -14,20 +14,21 @@ const Routes = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: SystemApp,
-      },
-      {
-        path: "/form/:name",
-        Component: Form,
-      },
-      {
-        path: "/login",
-        Component: Login,
-      },
-      {
-        path: "/dashboard",
+        // Component: SystemApp,
         Component: DashBoard,
       },
+      //   {
+      //     path: "/form/:name",
+      //     Component: Form,
+      //   },
+      //   {
+      //     path: "/login",
+      //     Component: Login,
+      //   },
+      //   {
+      //     path: "/dashboard",
+      //     Component: DashBoard,
+      //   },
     ],
   },
 ]);
