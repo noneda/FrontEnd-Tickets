@@ -8,7 +8,7 @@ const SomeItems = () => {
         return (
           <div
             key={index}
-            className="relative w-full h-12 shadow-xl/15 rounded-lg flex flex-row justify-baseline items-center gap-5 p-1 hover:scale-[1.05]"
+            className="relative w-full h-12 shadow-xl/15 rounded-lg flex flex-row justify-baseline items-center gap-5 p-1 hover:scale-[1.05] lg:hover:scale-[1.01]"
           >
             <span
               className={`h-full min-w-10 max-w-20 rounded-md px-1 ${styles.bgGradient} text-white text-sm text-wrap text-center truncate pt-2.5 `}
