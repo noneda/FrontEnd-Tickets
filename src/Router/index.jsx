@@ -21,11 +21,11 @@ const Routes = createBrowserRouter([
         Component: Form,
       },
       {
-        path: "login",
+        path: "/login",
         Component: Login,
       },
       {
-        path: "dashboard",
+        path: "/dashboard",
         Component: DashBoard,
       },
     ],
