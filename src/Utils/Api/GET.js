@@ -54,3 +54,16 @@ export const getUserByEmail = async (email) => {
   }
   return null;
 };
+
+export const getSecretariats = async (setSecretariat) => {
+  try {
+    const { data, status } = await API("api/get/basics/");
+    if (status === 200) {
+      setSecretariat(data.secretariats);
+    }
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error desconocido${status ? ` (${status})` : ""}`);
+    console.error("Error with", err.message);
+  }
+};

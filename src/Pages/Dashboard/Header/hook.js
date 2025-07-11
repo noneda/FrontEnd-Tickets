@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 export const useHeaderDashboard = ({ refCalendar }) => {
   const [dateDisplay, setDateDisplay] = useState("");
+  const [showSecretariat, setShowSecretariat] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -22,5 +24,20 @@ export const useHeaderDashboard = ({ refCalendar }) => {
     setDateDisplay(refCalendar.current.value);
   };
 
-  return [dateDisplay, handleCalendar, onChangeHandleCalendar];
+  const handleShowSecretariat = () => {
+    setShowSecretariat(!showSecretariat);
+  };
+  const handleShowSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
+  return [
+    dateDisplay,
+    handleCalendar,
+    onChangeHandleCalendar,
+    showSecretariat,
+    handleShowSecretariat,
+    showSearch,
+    handleShowSearch,
+  ];
 };
