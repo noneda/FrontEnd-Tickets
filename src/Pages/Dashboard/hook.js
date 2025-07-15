@@ -31,7 +31,17 @@ export const useDashboard = () => {
     setState(state);
   };
 
-  const handleClearALl = () => {};
+  const handleClearALl = () => {
+    setCalendar(formattedDate);
+    setTypeTicket("");
+    setState(undefined);
+    refSearch.current.value = "";
+    refSecretariat.current.forEach((el) => {
+      if (el?.checked) {
+        el.checked = false;
+      }
+    });
+  };
 
   return [
     calendar,
@@ -42,5 +52,6 @@ export const useDashboard = () => {
     handleTypeTicket,
     state,
     handleState,
+    handleClearALl,
   ];
 };

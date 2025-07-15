@@ -13,6 +13,7 @@ const DashBoard = () => {
     handleTypeTicket,
     state,
     handleState,
+    handleClearALl,
   ] = useDashboard();
   return (
     <>
@@ -61,7 +62,10 @@ const DashBoard = () => {
               Finalizado
             </button>
           </section>
-          <button className=" min-w-[142px]  h-10 rounded-2xl bg-red-400 text-xl text-white hover:font-bold self-center">
+          <button
+            className=" min-w-[142px]  h-10 rounded-2xl bg-red-400 text-xl text-white hover:font-bold self-center"
+            onClick={handleClearALl}
+          >
             Limpiar
           </button>
         </div>
