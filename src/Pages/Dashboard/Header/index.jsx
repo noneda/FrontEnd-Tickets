@@ -2,33 +2,37 @@ import PopUpSearch from "@/Assets/PopUpSearch";
 import { useHeaderDashboard } from "./hook";
 import PopUpSecretariat from "@/Assets/PopUpSecretariat";
 
-const HeaderDashboard = ({ refCalendar, refSecretariat, refSearch }) => {
+const HeaderDashboard = ({
+  calendar,
+  handleDateEvent,
+  refSecretariat,
+  refSearch,
+}) => {
   const [
-    dateDisplay,
     handleCalendar,
-    onChangeHandleCalendar,
-    shoSecretariat,
+    showSecretariat,
     handleShowSecretariat,
     showSearch,
     handleShowSearch,
-  ] = useHeaderDashboard({ refCalendar });
+  ] = useHeaderDashboard();
 
   return (
     <section className="flex flex-col items-end justify-center gap-2">
       <div className="relative flex flex-row w-full gap-2 items-center justify-between">
         <PopUpSecretariat
-          show={shoSecretariat}
+          show={showSecretariat}
           handle={handleShowSecretariat}
           refSecretariat={refSecretariat}
         />
         <section className="flex flex-row gap-6">
-          <h2 className="text-gray-600 font-bold text-md">{dateDisplay}</h2>
+          <h2 className="text-gray-600 font-bold text-md">{calendar}</h2>
           <input
+            id="date"
             type="date"
             className="hidden absolute"
-            ref={refCalendar}
+            value={calendar}
             name="calendar"
-            onChange={onChangeHandleCalendar}
+            onChange={handleDateEvent}
           />
           <button onClick={handleCalendar}>
             <svg

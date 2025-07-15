@@ -5,7 +5,8 @@ import { useDashboard } from "./hook";
 
 const DashBoard = () => {
   const [
-    refCalendar,
+    calendar,
+    handleDateEvent,
     refSecretariat,
     refSearch,
     typeTicket,
@@ -17,7 +18,8 @@ const DashBoard = () => {
     <>
       <section className="flex flex-col align-center justify-between w-full h-auto gap-5">
         <HeaderDashboard
-          refCalendar={refCalendar}
+          calendar={calendar}
+          handleDateEvent={handleDateEvent}
           refSecretariat={refSecretariat}
           refSearch={refSearch}
         />
