@@ -2,7 +2,7 @@ import { API } from "@/Shared";
 
 export const sendTicket = async (send, type, email, setTicket) => {
   try {
-    const { data, status } = await API.post("/api/ticket/public/", {
+    const { data, status } = await API.post("ticket/public/", {
       ticket: send,
       typeTicket: type,
       user: email,
@@ -21,7 +21,7 @@ export const sendTicket = async (send, type, email, setTicket) => {
 
 export const sendDocuments = async (documentsData, handlePopUp) => {
   try {
-    const { status } = await API.post("/api/documents/send/", documentsData);
+    const { status } = await API.post("documents/send/", documentsData);
     if (status === 200) {
       handlePopUp();
     }

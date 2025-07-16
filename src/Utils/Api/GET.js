@@ -2,7 +2,7 @@ import { API } from "@/Shared";
 
 export const getBasicData = async (setSchema) => {
   try {
-    const { data, status } = await API("api/get/basics/");
+    const { data, status } = await API("get/basics/");
     if (status === 200) {
       const onlyNamesServices = data.services.map((item) => item.name);
       const onlyNamesSecretariat = data.secretariats.map((item) => item.name);
@@ -27,9 +27,7 @@ export const getBasicData = async (setSchema) => {
 
 export const getEmailBySuggest = async (suggest) => {
   try {
-    const { data, status } = await API.get(
-      `/api/get/suggest/?email=${suggest}`
-    );
+    const { data, status } = await API.get(`get/suggest/?email=${suggest}`);
 
     if (status === 200) {
       return data.suggestions || "";
@@ -47,7 +45,7 @@ export const getEmailBySuggest = async (suggest) => {
 
 export const getUserByEmail = async (email) => {
   try {
-    const { data, status } = await API.get(`/api/get/user/?email=${email}`);
+    const { data, status } = await API.get(`get/user/?email=${email}`);
     if (status === 200) return data;
   } catch (err) {
     console.error("Error fetching user by email:", err.message);
@@ -57,7 +55,7 @@ export const getUserByEmail = async (email) => {
 
 export const getSecretariats = async (setSecretariat) => {
   try {
-    const { data, status } = await API("api/get/basics/");
+    const { data, status } = await API("get/basics/");
     if (status === 200) {
       setSecretariat(data.secretariats);
     }

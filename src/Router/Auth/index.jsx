@@ -16,7 +16,7 @@ const Auth = ({ children }) => {
     authenticate();
     const interval = setInterval(() => {
       authenticate();
-    }, 900000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [navigate]);
 
