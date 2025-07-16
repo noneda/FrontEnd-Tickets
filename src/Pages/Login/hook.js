@@ -1,18 +1,25 @@
-import { useRef } from "react";
-import { useGlobalContext } from "../../Context";
-import { PostLogin } from "../../Utils/Api/POST";
-
+import { useState } from "react";
+import { AuthenticateUser } from "@/Utils/Api/AUTH";
+import { useNavigate } from "react-router-dom";
 const useLogin = () => {
-  const user = useRef(null);
-  const pass = useRef(null);
-  const { setToken } = useGlobalContext();
+  const [isUser, setUser] = useState("");
+  const [isPass, setPass] = useState("");
+  const navigate = useNavigate();
+
+  const handlePass = (e) => setPass(e.target.value);
+  const handleUser = (e) => setUser(e.target.value);
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    PostLogin(setToken);
+    const send = {
+      username: isUser,
+      password: isPass,
+    };
+
+    AuthenticateUser(send, navigate);
   };
 
-  return [user, pass, handleSubmitLogin];
+  return [isUser, isPass, handlePass, handleUser, handleSubmitLogin];
 };
 
-export default useLogin;  
+export default useLogin;

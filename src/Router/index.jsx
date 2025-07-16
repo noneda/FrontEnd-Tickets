@@ -7,6 +7,8 @@ import DashBoard from "@/Pages/Dashboard";
 import Login from "@/Pages/Login";
 import Form from "@/Pages/System/Form";
 
+import Auth from "./Auth";
+
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -14,21 +16,24 @@ const Routes = createBrowserRouter([
     children: [
       {
         index: true,
-        // Component: SystemApp,
-        Component: DashBoard,
+        Component: SystemApp,
       },
-      //   {
-      //     path: "/form/:name",
-      //     Component: Form,
-      //   },
-      //   {
-      //     path: "/login",
-      //     Component: Login,
-      //   },
-      //   {
-      //     path: "/dashboard",
-      //     Component: DashBoard,
-      //   },
+      {
+        path: "/form/:name",
+        Component: Form,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <Auth>
+            <DashBoard />
+          </Auth>
+        ),
+      },
     ],
   },
 ]);

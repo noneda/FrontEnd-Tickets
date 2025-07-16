@@ -2,7 +2,7 @@ import { SectSystem, colorMap } from "@/Utils/SystemApp";
 
 const SomeItems = () => {
   return (
-    <section className="relative w-full h-auto flex flex-col justify-center items-center gap-5">
+    <section className=" w-full h-auto grid grid-cols-1 lg:grid-cols-2 justify-items-center items-stretch gap-5">
       {SectSystem.map((element, index) => {
         const styles = colorMap[element.color] || colorMap.white;
         return (

@@ -3,5 +3,13 @@ import config from "@/Env";
 
 export const API = axios.create({
   baseURL: config.API,
-  timeout: 750,
+  timeout: 2000,
+});
+
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Token ${token}`;
+  }
+  return config;
 });

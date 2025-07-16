@@ -1,13 +1,14 @@
 import useLogin from "./hook";
 
 const Login = () => {
-  const [user, pass, handleSubmitLogin] = useLogin();
+  const [isUser, isPass, handlePass, handleUser, handleSubmitLogin] =
+    useLogin();
 
   return (
     <div className="relative w-full flex justify-center">
       <form
         onSubmit={handleSubmitLogin}
-        className="relative w-[330px] px-5 py-10 bg-white mx-8 md:mx-0 shadow-xl/30 rounded-3xl sm:p-10"
+        className="relative w-[330px] px-5 py-10 bg-white mx-8 md:mx-0 shadow-xl/10 rounded-3xl sm:p-10"
       >
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b  md:w-1/4"></span>
@@ -28,7 +29,8 @@ const Login = () => {
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               type="email"
               id="User"
-              ref={user}
+              value={isUser}
+              onChange={handleUser}
               required
             />
             <label
@@ -41,7 +43,8 @@ const Login = () => {
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               type="password"
               id="password"
-              ref={pass}
+              value={isPass}
+              onChange={handlePass}
               required
             />
           </div>
