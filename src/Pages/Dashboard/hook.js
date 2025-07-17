@@ -43,7 +43,7 @@ export const useDashboard = () => {
     });
   };
 
-  return [
+  return {
     calendar,
     handleDateEvent,
     refSecretariat,
@@ -53,5 +53,5 @@ export const useDashboard = () => {
     state,
     handleState,
     handleClearALl,
-  ];
+  };
 };

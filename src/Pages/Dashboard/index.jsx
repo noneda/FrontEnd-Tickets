@@ -4,7 +4,7 @@ import SomeItems from "@/Assets/SomeItems";
 import { useDashboard } from "./hook";
 
 const DashBoard = () => {
-  const [
+  const {
     calendar,
     handleDateEvent,
     refSecretariat,
@@ -14,7 +14,7 @@ const DashBoard = () => {
     state,
     handleState,
     handleClearALl,
-  ] = useDashboard();
+  } = useDashboard();
   return (
     <>
       <section className="flex flex-col align-center justify-between w-full h-auto gap-5">
