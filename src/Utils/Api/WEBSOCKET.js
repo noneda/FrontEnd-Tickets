@@ -42,6 +42,8 @@ export const useTicketSocket = () => {
     }
   }, [calendar, typeTicket, state]);
 
+  console.log(lastJsonMessage);
+
   return {
     data: lastJsonMessage,
     readyState,
