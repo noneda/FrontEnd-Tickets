@@ -1,4 +1,4 @@
-import { API } from "@/Shared";
+import { API } from "@/Shared/Api";
 
 export const getBasicData = async (setSchema) => {
   try {

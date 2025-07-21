@@ -1,6 +1,6 @@
 import HeaderDashboard from "./Header";
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
-import SomeItems from "@/Assets/SomeItems";
+// import SomeItems from "@/Assets/SomeItems";
 import { useDashboard } from "./hook";
 
 const DashBoard = () => {
@@ -69,7 +69,7 @@ const DashBoard = () => {
             Limpiar
           </button>
         </div>
-        <SomeItems />
+        {/* <SomeItems /> */}
       </section>
     </>
   );

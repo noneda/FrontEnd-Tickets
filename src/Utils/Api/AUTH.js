@@ -1,4 +1,5 @@
-import { API } from "@/Shared";
+import { API } from "@/Shared/Api";
+
 export const getAuthentication = async () => {
   try {
     const { status } = await API("token/confirm/");

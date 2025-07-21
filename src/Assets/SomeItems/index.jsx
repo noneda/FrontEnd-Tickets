@@ -1,16 +1,6 @@
-// Assets/SomeItems.jsx
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
-import { useTicketSocket } from "@/Utils/Api/WEBSOCKET";
 const SomeItems = () => {
-  const { data } = useTicketSocket();
-
   const grouped = SectSystem.map((section) => {
-    const tickets = (data?.tickets || []).filter(
-      (ticket) => ticket.typeTicket === section.name
-    );
-
-    const latest = tickets[0];
-
     return {
       ...section,
       latestCode: latest?.code || "MA0000",

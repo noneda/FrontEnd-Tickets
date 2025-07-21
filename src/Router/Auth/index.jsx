@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 const Auth = ({ children }) => {
   const navigate = useNavigate();
-
   const authenticate = async () => {
     const haveToken = localStorage.getItem("token");
     if (!haveToken) navigate("/");
     const isAuthenticate = await getAuthentication();
-    if (!isAuthenticate) navigate("/");
+    if (!isAuthenticate) {
+      localStorage.setItem("token", "");
+      navigate("/");
+    }
   };
 
   useEffect(() => {
