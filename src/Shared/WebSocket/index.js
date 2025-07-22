@@ -85,6 +85,11 @@ const useWebSocket = (extension, options = {}) => {
     );
 
     try {
+      if (!fullUrl) {
+        console.error("WebSocket URL is invalid. Aborting connection.");
+        return;
+      }
+
       const ws = new WebSocket(fullUrl);
 
       ws.onopen = (event) => {

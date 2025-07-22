@@ -90,7 +90,7 @@ export const useTicketsWebSocket = ({ group }) => {
 
   useEffect(() => {
     requestTicketsRef.current = requestTickets;
-  }, [requestTicketsRef]);
+  }, [requestTickets]);
 
   const connectionStatus = useMemo(() => {
     return {
