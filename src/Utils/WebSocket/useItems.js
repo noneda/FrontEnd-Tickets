@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { useDashboard } from "@/Pages/Dashboard/hook";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useAuthContext } from "@/Context";
+import config from "@/Env";
 
 export const useTicketsWebSocket = ({ group }) => {
   const { calendar, refSearch, typeTicket, state } = useDashboard();
+  const newCalendar = calendar.replace(/-/g, "/");
 
   const [ticket, setTickets] = useState([]);
   const [allGroups, setAllGroups] = useState(0);
@@ -12,7 +14,7 @@ export const useTicketsWebSocket = ({ group }) => {
   const [loading, setLoading] = useState(false);
   const { token, clearToken } = useAuthContext();
 
-  const socketUrl = "ws://localhost:8000/ws/private/";
+  const socketUrl = `${config.WEBSOCKET}private/`;
   const options = useMemo(
     () => ({
       shouldReconnect: (closeEvent) => {
@@ -82,7 +84,7 @@ export const useTicketsWebSocket = ({ group }) => {
         active: state,
         typeTicket: typeTicket,
         code: refSearch,
-        date: calendar,
+        date: newCalendar,
       };
       console.log("Sending request message:", message);
       sendMessage(JSON.stringify(message));
