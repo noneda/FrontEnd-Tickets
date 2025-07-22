@@ -4,6 +4,11 @@ export const useGlobalToken = () => {
   const [change, setChange] = useState(true);
   const [token, setToken] = useState("");
 
+  const clearToken = () => {
+    setToken(null);
+    localStorage.removeItem("token");
+  };
+
   useEffect(() => {
     const tk = localStorage.getItem("token");
     setToken(tk);
@@ -13,5 +18,5 @@ export const useGlobalToken = () => {
     setChange(!change);
   }, [token]);
 
-  return [change, token];
+  return [change, token, clearToken];
 };

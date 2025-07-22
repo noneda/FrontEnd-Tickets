@@ -6,10 +6,10 @@ const AuthContext = createContext(null);
 export const useAuthContext = () => useContext(AuthContext);
 
 const ViewAuthContext = ({ children }) => {
-  const [change, token] = useGlobalToken();
+  const [change, token, clearToken] = useGlobalToken();
 
   return (
-    <AuthContext.Provider value={[change, token]}>
+    <AuthContext.Provider value={{ change, token, clearToken }}>
       {children}
     </AuthContext.Provider>
   );
