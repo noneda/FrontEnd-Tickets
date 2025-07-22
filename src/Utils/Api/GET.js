@@ -1,4 +1,4 @@
-import { HTTP } from "@/Shared/Api";
+import { HTTP } from "@/Shared/Api.js";
 
 export const getBasicData = async (setSchema) => {
   try {
