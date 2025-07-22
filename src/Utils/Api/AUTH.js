@@ -1,8 +1,8 @@
-import { API } from "@/Shared/Api";
+import { HTTP } from "@/Shared/Api";
 
 export const getAuthentication = async () => {
   try {
-    const { status } = await API("token/confirm/");
+    const { status } = await HTTP("token/confirm/");
     if (status === 202) {
       return true;
     }
@@ -14,7 +14,7 @@ export const getAuthentication = async () => {
 
 export const AuthenticateUser = async (send, navigate) => {
   try {
-    const { data, status } = await API.post("token/auth/", send);
+    const { data, status } = await HTTP.post("token/auth/", send);
     if (status === 200) {
       localStorage.setItem("token", data.token);
       navigate("/dashboard");
