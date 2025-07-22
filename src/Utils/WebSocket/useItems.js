@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useDashboard } from "@/Pages/Dashboard/hook";
-import useWebSocket, { ReadyState } from "@/Shared/WebSocket";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useAuthContext } from "@/Context";
 
 export const useTicketsWebSocket = ({ group }) => {
@@ -12,85 +12,57 @@ export const useTicketsWebSocket = ({ group }) => {
   const [loading, setLoading] = useState(false);
   const { token, clearToken } = useAuthContext();
 
-  const requestTicketsRef = useRef(null);
-
+  const socketUrl = "ws://localhost:8000/ws/private/";
   const options = useMemo(
     () => ({
-      authToken: token,
-      onOpen: () => {
+      shouldReconnect: (closeEvent) => {
+        if (closeEvent.code === 403) {
+          console.warn("WebSocket closed with 403. Not reconnecting.");
+          return false;
+        }
+        console.log("WebSocket closed, attempting reconnect...");
+        return true;
+      },
+      reconnectInterval: 3000,
+      reconnectAttempts: 10,
+
+      queryParams: {
+        token: token,
+      },
+      onOpen: (event) => {
         console.log("WebSocket connection opened!");
         setError(null);
         setLoading(true);
-
-        if (requestTicketsRef.current) {
-          requestTicketsRef.current();
-        }
       },
       onClose: (event) => {
-        console.log("WebSocket connection closed.", event.code);
+        console.log("WebSocket connection closed.", event.code, event.reason);
         if (event.code === 403) {
           setError(
             "Autenticación fallida o token inválido. Por favor, inicie sesión de nuevo."
           );
           clearToken();
         } else {
-          setError(`Conexión cerrada: ${event.code}`);
+          setError(
+            `Conexión cerrada: ${event.code} - ${
+              event.reason || "Unknown reason"
+            }`
+          );
         }
         setLoading(false);
       },
       onError: (event) => {
         console.error("WebSocket error:", event);
-        if (event instanceof Error) {
-          setError(`WebSocket error: ${event.message}`);
-        } else {
-          setError("WebSocket error occurred. Check console for details.");
-        }
+        setError("WebSocket error occurred. Check console for details.");
         setLoading(false);
       },
     }),
-    [token, clearToken]
+    [token, clearToken] // Dependencias: Si el
   );
 
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    "private/",
+    token ? socketUrl : null,
     options
   );
-
-  const requestTickets = useCallback(() => {
-    if (readyState === ReadyState.OPEN && token) {
-      setLoading(true);
-      const message = {
-        group: group,
-        active: state,
-        typeTicket: typeTicket,
-        code: refSearch,
-        date: calendar,
-      };
-      console.log("Sending request message:", message);
-      sendMessage(JSON.stringify(message));
-    } else if (!token) {
-      setError("Autenticación requerida para cargar tickets.");
-      setLoading(false);
-    } else {
-      console.warn("WebSocket not open. Cannot send request.");
-      setError(
-        "WebSocket is not open. Please wait for connection or ensure you are authenticated."
-      );
-    }
-  }, [
-    group,
-    state,
-    typeTicket,
-    refSearch,
-    calendar,
-    readyState,
-    sendMessage,
-    token,
-  ]);
-
-  useEffect(() => {
-    requestTicketsRef.current = requestTickets;
-  }, [requestTickets]);
 
   const connectionStatus = useMemo(() => {
     return {
@@ -101,6 +73,23 @@ export const useTicketsWebSocket = ({ group }) => {
       [ReadyState.UNINSTANTIATED]: "Inactivo",
     }[readyState];
   }, [readyState]);
+
+  const requestTickets = useCallback(() => {
+    if (readyState === ReadyState.OPEN) {
+      setLoading(true);
+      const message = {
+        group: group,
+        active: state,
+        typeTicket: typeTicket,
+        code: refSearch,
+        date: calendar,
+      };
+      console.log("Sending request message:", message);
+      sendMessage(JSON.stringify(message));
+    } else {
+      console.warn("WebSocket not open. Cannot send request.");
+    }
+  }, [group, state, typeTicket, refSearch, calendar, readyState, sendMessage]);
 
   useEffect(() => {
     if (lastMessage !== null) {
@@ -131,17 +120,22 @@ export const useTicketsWebSocket = ({ group }) => {
 
   useEffect(() => {
     if (token && readyState === ReadyState.OPEN) {
-      if (requestTicketsRef.current) {
-        requestTicketsRef.current();
-      }
+      requestTickets();
     } else if (!token) {
       setTickets([]);
       setAllGroups(0);
-      setError(
-        "No hay token de autenticación. Inicie sesión para ver los tickets."
-      );
+      setError("No authentication token. Please log in to view tickets.");
     }
-  }, [group, state, typeTicket, refSearch, calendar, requestTickets, token]);
+  }, [
+    group,
+    state,
+    typeTicket,
+    refSearch,
+    calendar,
+    token,
+    readyState,
+    requestTickets,
+  ]);
 
   return { ticket, allGroups, error, loading, connectionStatus };
 };

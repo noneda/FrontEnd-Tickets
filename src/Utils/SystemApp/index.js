@@ -12,7 +12,7 @@ export const SectSystem = [
     param: "WebPage",
     color: "green",
     img: "/undraw_onboarding_wkl7.svg",
-    text: "blalblablablalbalblblbaalblablablalblablablalbalblblbaalblablablalblablablalbalblblbaalblablablalblablablalbalblblbaalblabla",
+    text: "...",
     link: "/form/WebPage",
   },
   {
@@ -20,7 +20,7 @@ export const SectSystem = [
     param: "EmailsUsers",
     color: "blue",
     img: "/undraw_people_ka7y.svg",
-    text: "blalblablablalbalblblbaalblablablalblablablalbalblblbaalblablablalblablablalbalblblbaalblabla",
+    text: "...",
     link: "form/EmailsUsers",
   },
 ];
