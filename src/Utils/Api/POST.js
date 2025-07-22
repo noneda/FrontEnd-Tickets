@@ -1,4 +1,4 @@
-import { HTTP } from "@/Shared/Api.js";
+import { HTTP } from "@/Shared";
 
 export const sendTicket = async (send, type, email, setTicket) => {
   try {

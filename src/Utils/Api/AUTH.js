@@ -1,4 +1,4 @@
-import { HTTP } from "@/Shared/Api.js";
+import { HTTP } from "@/Shared";
 
 export const getAuthentication = async () => {
   try {
