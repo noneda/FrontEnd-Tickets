@@ -1,9 +1,11 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 
-export const useDashboard = () => {
-  const [calendar, setCalendar] = useState("");
+export const hookDashboardContext = () => {
   const refSecretariat = useRef([]);
-  // refSecretariat.current.filter((el) => el?.checked).map((el) => el.value)
+
+  // * Calendar Manager
+  const [calendar, setCalendar] = useState("");
+  const [calendarChanges, setCalendarChanges] = useState(false);
 
   const today = new Date();
   const yyyy = today.getFullYear();
@@ -15,7 +17,19 @@ export const useDashboard = () => {
     setCalendar(formattedDate);
   }, []);
 
-  const refSearch = useRef(null);
+  //TODO: Make Debouncing on search to don`t generate overload to Backend
+  const [search, setSearch] = useState("");
+  const handleSearch = (e) => setSearch(e.target.value);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [search]);
+
   const [typeTicket, setTypeTicket] = useState("");
   const [state, setState] = useState(undefined);
 
@@ -25,6 +39,7 @@ export const useDashboard = () => {
 
   const handleDateEvent = (e) => {
     setCalendar(e.target.value);
+    setCalendarChanges(true);
   };
 
   const handleState = (state) => {
@@ -35,23 +50,27 @@ export const useDashboard = () => {
     setCalendar(formattedDate);
     setTypeTicket("");
     setState(undefined);
-    refSearch.current.value = "";
-    refSecretariat.current.forEach((el) => {
-      if (el?.checked) {
-        el.checked = false;
-      }
-    });
+    setSearch("");
+    setDebouncedSearch("");
+    // refSecretariat.current.forEach((el) => {
+    //   if (el?.checked) {
+    //     el.checked = false;
+    //   }
+    // });
   };
 
   return {
     calendar,
+    calendarChanges,
     handleDateEvent,
     refSecretariat,
-    refSearch,
+    search,
+    handleSearch,
     typeTicket,
     handleTypeTicket,
     state,
     handleState,
     handleClearALl,
+    debouncedSearch,
   };
 };

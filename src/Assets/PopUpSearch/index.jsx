@@ -1,7 +1,7 @@
 import { handlePopUpSearch } from "./hook";
 
 // TODO: Faltan los refs
-const PopUpSearch = ({ show, handle, refSearch }) => {
+const PopUpSearch = ({ show, handle, search, handleSearch }) => {
   return (
     <section
       className={`${
@@ -14,7 +14,8 @@ const PopUpSearch = ({ show, handle, refSearch }) => {
           className="appearance-none input shadow-lg focus:border-2 border-gray-300 px-5 py-3 rounded-xl w-56 transition-all focus:w-64 outline-none"
           name="search"
           type="search"
-          ref={refSearch}
+          value={search}
+          onChange={handleSearch}
         />
         <svg
           className="size-6 absolute top-3 right-3 text-gray-500"
@@ -34,6 +35,7 @@ const PopUpSearch = ({ show, handle, refSearch }) => {
       <button
         className="cursor-pointer duration-200 hover:scale-125 active:scale-100"
         title="Go Back"
+        onClick={handle}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

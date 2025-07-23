@@ -1,20 +1,21 @@
 import HeaderDashboard from "./Header";
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
 import SomeItems from "@/Assets/SomeItems";
-import { useDashboard } from "./hook";
+import { useDashboardContext } from "@/Context/Dashboard";
 
 const DashBoard = () => {
   const {
     calendar,
     handleDateEvent,
     refSecretariat,
-    refSearch,
+    search,
+    handleSearch,
     typeTicket,
     handleTypeTicket,
     state,
     handleState,
     handleClearALl,
-  } = useDashboard();
+  } = useDashboardContext();
   return (
     <>
       <section className="flex flex-col align-center justify-between w-full h-auto gap-5">
@@ -22,7 +23,8 @@ const DashBoard = () => {
           calendar={calendar}
           handleDateEvent={handleDateEvent}
           refSecretariat={refSecretariat}
-          refSearch={refSearch}
+          search={search}
+          handleSearch={handleSearch}
         />
         <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full justify-items-center">

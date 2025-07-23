@@ -22,14 +22,10 @@ export const useSomeItems = () => {
   const { ticket, allGroups, error, loading, connectionStatus } =
     useTicketsWebSocket({ group });
 
-  const grouped = SectSystem.map((section) => {
-    return {
-      ...section,
-      //   latestCode: latest?.code || "MA0000",
-      //   latestDate: latest?.date || "##/##/##",
-      //   count: tickets.length,
-    };
-  });
+  const grouped = ticket.map((items) => ({
+    ...items,
+    color: SectSystem.find((e) => e.name === items?.typeTicket)?.color || null,
+  }));
 
-  return [grouped, group, handleNext, handleAfter];
+  return [grouped, group, allGroups, handleNext, handleAfter];
 };
