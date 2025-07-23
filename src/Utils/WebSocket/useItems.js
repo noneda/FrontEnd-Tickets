@@ -5,7 +5,8 @@ import { useAuthContext } from "@/Context";
 import config from "@/Env";
 
 export const useTicketsWebSocket = ({ group }) => {
-  const { calendar, refSearch, typeTicket, state } = useDashboard();
+  const { calendar, calendarChanges, refSearch, typeTicket, state } =
+    useDashboard();
   const newCalendar = calendar.replace(/-/g, "/");
 
   const [ticket, setTickets] = useState([]);
@@ -58,7 +59,7 @@ export const useTicketsWebSocket = ({ group }) => {
         setLoading(false);
       },
     }),
-    [token, clearToken] // Dependencias: Si el
+    [token, clearToken]
   );
 
   const { sendMessage, lastMessage, readyState } = useWebSocket(
@@ -83,8 +84,8 @@ export const useTicketsWebSocket = ({ group }) => {
         group: group,
         active: state,
         typeTicket: typeTicket,
-        code: refSearch,
-        date: newCalendar,
+        code: refSearch.current,
+        date: calendarChanges && newCalendar,
       };
       console.log("Sending request message:", message);
       sendMessage(JSON.stringify(message));

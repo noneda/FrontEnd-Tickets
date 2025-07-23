@@ -3,6 +3,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 export const useDashboard = () => {
   const [calendar, setCalendar] = useState("");
   const refSecretariat = useRef([]);
+  const [calendarChanges, setCalendarChanges] = useState(false);
   // refSecretariat.current.filter((el) => el?.checked).map((el) => el.value)
 
   const today = new Date();
@@ -25,6 +26,7 @@ export const useDashboard = () => {
 
   const handleDateEvent = (e) => {
     setCalendar(e.target.value);
+    setCalendar(true);
   };
 
   const handleState = (state) => {
@@ -45,6 +47,7 @@ export const useDashboard = () => {
 
   return {
     calendar,
+    calendarChanges,
     handleDateEvent,
     refSecretariat,
     refSearch,
