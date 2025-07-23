@@ -37,7 +37,7 @@ const SomeItems = () => {
         <button
           className="cursor-pointer"
           onClick={handleAfter}
-          disabled={() => group === 0}
+          disabled={group === 0}
         >
           <svg
             className="size-6 right-[10%] xl:right-3 text-gray-500"
@@ -65,7 +65,7 @@ const SomeItems = () => {
         <button
           className="cursor-pointer"
           onClick={handleNext}
-          disabled={() => group === allGroups - 1}
+          disabled={group === allGroups - 1}
         >
           <svg
             className="size-6 right-[10%] xl:right-3 text-gray-500"

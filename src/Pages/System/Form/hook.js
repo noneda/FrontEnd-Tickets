@@ -1,10 +1,11 @@
 import { useState, useCallback, useRef, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
 import { getBasicData, getUserByEmail } from "@/Utils/Api/GET";
 import { sendTicket, sendDocuments } from "@/Utils/Api/POST";
 
 const useHelpDesk = () => {
+  const navigate = useNavigate();
   const refs = useRef({});
   const [schema, setSchema] = useState([]);
   const [isTicket, setTicket] = useState({});
@@ -70,6 +71,7 @@ const useHelpDesk = () => {
 
   const handlePopUp = useCallback(() => {
     setPopUp(!isPopUp);
+    // navigate("/");
   }, [isPopUp]);
 
   const sendData = () => {
@@ -118,6 +120,7 @@ const useHelpDesk = () => {
     refs,
     setAutocomplete,
     isTicket,
+    navigate
   ];
 };
 

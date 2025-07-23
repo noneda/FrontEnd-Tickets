@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
-import { useDashboard } from "@/Pages/Dashboard/hook";
 import useWebSocket, { ReadyState } from "react-use-websocket";
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { useDashboardContext } from "@/Context/Dashboard";
 import { useAuthContext } from "@/Context";
 import config from "@/Env";
 
 export const useTicketsWebSocket = ({ group }) => {
-  const { calendar, calendarChanges, refSearch, typeTicket, state } =
-    useDashboard();
-  const newCalendar = calendar.replace(/-/g, "/");
+  const { calendar, calendarChanges, debouncedSearch, typeTicket, state } =
+    useDashboardContext();
 
   const [ticket, setTickets] = useState([]);
   const [allGroups, setAllGroups] = useState(0);
@@ -84,15 +83,25 @@ export const useTicketsWebSocket = ({ group }) => {
         group: group,
         active: state,
         typeTicket: typeTicket,
-        code: refSearch.current,
-        date: calendarChanges && newCalendar,
+        code: debouncedSearch,
+        date: calendarChanges && calendar.replace(/-/g, "/"),
       };
+      console.log(message);
+
       console.log("Sending request message:", message);
       sendMessage(JSON.stringify(message));
     } else {
       console.warn("WebSocket not open. Cannot send request.");
     }
-  }, [group, state, typeTicket, refSearch, calendar, readyState, sendMessage]);
+  }, [
+    group,
+    state,
+    typeTicket,
+    debouncedSearch,
+    calendar,
+    readyState,
+    sendMessage,
+  ]);
 
   useEffect(() => {
     if (lastMessage !== null) {
@@ -133,7 +142,7 @@ export const useTicketsWebSocket = ({ group }) => {
     group,
     state,
     typeTicket,
-    refSearch,
+    debouncedSearch,
     calendar,
     token,
     readyState,

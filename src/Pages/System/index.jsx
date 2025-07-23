@@ -58,6 +58,14 @@ const SystemApp = () => {
           );
         })}
       </section>
+      <section className="pt-20">
+        <button
+          className="select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white  shadow-md transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          onClick={() => navigate("/Login")}
+        >
+          Administrador
+        </button>
+      </section>
     </>
   );
 };

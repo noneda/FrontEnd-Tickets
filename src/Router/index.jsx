@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "@/Layout";
 import ViewAuthContext from "@/Context";
+import ViewDashBoard from "@/Context/DashBoard";
 import SystemApp from "@/Pages/System";
 // import Form from "@/Pages/System/Form"; //TODO: This is a Example how are the Styles from ALL
 import DashBoard from "@/Pages/Dashboard";
@@ -30,9 +31,11 @@ const Routes = createBrowserRouter([
         path: "/dashboard",
         element: (
           <ViewAuthContext>
-            <Auth>
-              <DashBoard />
-            </Auth>
+            <ViewDashBoard>
+              <Auth>
+                <DashBoard />
+              </Auth>
+            </ViewDashBoard>
           </ViewAuthContext>
         ),
       },
