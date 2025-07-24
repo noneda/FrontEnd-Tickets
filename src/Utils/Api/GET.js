@@ -65,3 +65,5 @@ export const getSecretariats = async (setSecretariat) => {
     console.error("Error with", err.message);
   }
 };
+
+export const getTicket = (idTicket, code, submissionDate) => {};

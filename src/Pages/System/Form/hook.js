@@ -1,8 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
-import { getBasicData, getUserByEmail } from "@/Utils/Api/GET";
+import { getUserByEmail, getBasicData } from "@/Utils/Api/GET";
 import { sendTicket, sendDocuments } from "@/Utils/Api/POST";
+import { getSchema } from "@/Utils/Schemas";
 
 const useHelpDesk = () => {
   const navigate = useNavigate();
@@ -20,32 +21,10 @@ const useHelpDesk = () => {
   const keysToUpdate = ["name", "phone", "department", "email"];
 
   const styles = colorMap[System.color];
-  const getSchema = async () => {
-    try {
-      const schemaMap = {
-        HelpDesk: () => import("@/Utils/Schemas/HelpDesk.json"),
-        WebPage: () => import("@/Utils/Schemas/WebPage.json"),
-        EmailsUsers: () => import("@/Utils/Schemas/EmailsUsers.json"),
-      };
-      const module = await schemaMap[System.param]();
-      const Schema = module.Schema || module.default;
-
-      Schema.forEach((field) => {
-        if (!refs.current[field.id]) {
-          refs.current[field.id] =
-            field.type === "TypeChoose" ? { current: [] } : { current: null };
-        }
-      });
-      setSchema([...Schema]);
-      getBasicData(setSchema);
-    } catch (err) {
-      console.error("Error cargando el esquema:", err);
-      return null;
-    }
-  };
 
   useEffect(() => {
-    getSchema();
+    getSchema({ refs, System, setSchema });
+    getBasicData(setSchema);
   }, []);
 
   const handleAutocomplete = async () => {
@@ -120,7 +99,7 @@ const useHelpDesk = () => {
     refs,
     setAutocomplete,
     isTicket,
-    navigate
+    navigate,
   ];
 };
 

@@ -9,6 +9,7 @@ import DashBoard from "@/Pages/Dashboard";
 import Login from "@/Pages/Login";
 import Form from "@/Pages/System/Form";
 import Auth from "./Auth";
+import OneItem from "@/Assets/OneItem";
 
 const Routes = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const Routes = createBrowserRouter([
             </ViewDashBoard>
           </ViewAuthContext>
         ),
+      },
+      {
+        path: "/OneItem",
+        Component: OneItem,
       },
     ],
   },
