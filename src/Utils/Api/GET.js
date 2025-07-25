@@ -66,4 +66,40 @@ export const getSecretariats = async (setSecretariat) => {
   }
 };
 
-export const getTicket = (idTicket, code, submissionDate) => {};
+export const getTicket = async ({
+  idTicket = null,
+  code,
+  submissionDate,
+  sets,
+}) => {
+  try {
+    const urlFull = `ticket/public/?${
+      idTicket
+        ? `ticket=${idTicket}`
+        : `submissionDate=${submissionDate}&code=${code}`
+    }`;
+    const { data, status } = await HTTP.get(urlFull);
+    if (status === 200) {
+      sets.setTicket({
+        ...data?.ticket,
+        ...({ service: data?.service.name } || {}),
+      });
+      sets.setUser(data?.user || {});
+      sets.setData(data?.data || []);
+      sets.setObservation(data?.observation || []);
+    }
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error desconocido ${status ? `(${status})` : ""}`);
+    console.log("Error with: ", err.message);
+  }
+};
+
+export const getDocuments = async ({ id }) => {
+  try {
+    const { status, data } = await HTTP.get(`documents/send/?ticket=${id}`);
+    if (status === 200) {
+      
+    }
+  } catch (err) {}
+};

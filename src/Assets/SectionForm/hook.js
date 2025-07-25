@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getEmailBySuggest } from "../../Utils/Api/GET";
+import { getEmailBySuggest } from "@/Utils/Api/GET";
 
 export const useEmailSuggestion = (refObj, autocomplete) => {
   const [suggestion, setSuggestion] = useState("");

@@ -33,13 +33,15 @@ const ComponentsInput = {
             <p className="text-gray-400 text-sm pl-1">
               Sugerencia: <span className="font-medium">{suggestion}</span>
             </p>
-            <button
-              type="button"
-              className="sm:hidden mt-2 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg shadow-md hover:bg-blue-600 transition"
-              onClick={handleAutocomplete}
-            >
-              Autocompletar
-            </button>
+            {suggestion !== "No se encontró el correo" && (
+              <button
+                type="button"
+                className="sm:hidden mt-2 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg shadow-md hover:bg-blue-600 transition"
+                onClick={handleAutocomplete}
+              >
+                Autocompletar
+              </button>
+            )}
           </>
         )}
       </div>

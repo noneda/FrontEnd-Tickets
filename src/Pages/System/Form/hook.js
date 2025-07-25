@@ -15,15 +15,15 @@ const useHelpDesk = () => {
   const [isPopUp, setPopUp] = useState(false);
 
   const param = useParams();
-  const System = SectSystem.find((e) => e.param === param.name);
+  const system = SectSystem.find((e) => e.param === param.name);
 
-  const typeTicket = System.name;
+  const typeTicket = system.name;
   const keysToUpdate = ["name", "phone", "department", "email"];
 
-  const styles = colorMap[System.color];
+  const styles = colorMap[system.color];
 
   useEffect(() => {
-    getSchema({ refs, System, setSchema });
+    getSchema({ refs, system, setSchema });
     getBasicData(setSchema);
   }, []);
 
@@ -73,11 +73,18 @@ const useHelpDesk = () => {
       }
     });
 
-    const email = refs.current?.email?.current?.value;
-    const secretariat = refs.current.department.current.value;
-    sendTicket(dataTicket, typeTicket, email, setTicket).then((ticket) => {
+    const user = {
+      email: refs.current?.email?.current?.value,
+      name: refs.current?.name?.current?.value,
+      phone: refs.current?.phone?.current?.value,
+      department: refs.current.department.current.value,
+    };
+
+    console.log(user);
+
+    sendTicket(dataTicket, typeTicket, user, setTicket).then((ticket) => {
       if (!ticket?.id) return alert("No se generó el ticket correctamente");
-      documentsData.append("secretariat", secretariat);
+      documentsData.append("secretariat", user.department);
       documentsData.append("ticket", ticket.id);
       sendDocuments(documentsData, handlePopUp);
     });
@@ -93,7 +100,7 @@ const useHelpDesk = () => {
     isPopUp,
     handlePopUp,
     handleForm,
-    System,
+    system,
     styles,
     schema,
     refs,

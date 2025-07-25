@@ -10,7 +10,7 @@
     {
       "type": "TypeText",
       "id": "name",
-      "Question": "Nombres y Apellidos",
+      "Question": "Nombre y Apellido",
       "required": true,
       "inputType": "text"
     },
@@ -20,7 +20,7 @@
       "Question": "Extensión o Celular",
       "required": true,
       "inputType": "number"
-    },
+    },  
     {
       "type": "TypeSelect",
       "id": "department",

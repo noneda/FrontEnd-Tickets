@@ -2,12 +2,12 @@ import PopUpSystem from "@/Assets/PopUpSystem";
 import useHelpDesk from "./hook";
 import ComponentsInput from "@/Assets/SectionForm";
 
-const HelpDesk = () => {
+const Form = () => {
   const [
     isPopUp,
     handlePopUp,
     handleForm,
-    System,
+    system,
     styles,
     Schema,
     refs,
@@ -46,7 +46,7 @@ const HelpDesk = () => {
             className={`absolute flex justify-center items-center overflow-visible w-11/12 shadow-lg h-50 -top-10 rounded-2xl group-hover/system:-top-12 ${styles.bgGradient}`}
           >
             <img
-              src={System.img}
+              src={system.img}
               alt=""
               className="absolute -top-10 bg-cover h-full bg-center group-hover/system:-top-12 transition-all delay-50 duration-200"
             />
@@ -55,11 +55,11 @@ const HelpDesk = () => {
             <h5
               className={`mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal ${styles.text}`}
             >
-              {System.name}
+              {system.name}
             </h5>
             <p
               className="block font-sans text-base font-light leading-relaxed text-inherit"
-              dangerouslySetInnerHTML={{ __html: System.text }}
+              dangerouslySetInnerHTML={{ __html: system.text }}
             ></p>
           </div>
           <div className="p-6 w-full">
@@ -101,4 +101,4 @@ const HelpDesk = () => {
   );
 };
 
-export default HelpDesk;
+export default Form;

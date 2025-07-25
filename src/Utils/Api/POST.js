@@ -1,11 +1,11 @@
 import { HTTP } from "@/Shared";
 
-export const sendTicket = async (send, type, email, setTicket) => {
+export const sendTicket = async (send, type, user, setTicket) => {
   try {
     const { data, status } = await HTTP.post("ticket/public/", {
       ticket: send,
       typeTicket: type,
-      user: email,
+      user: user,
     });
 
     if (status === 200) {

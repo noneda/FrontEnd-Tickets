@@ -1,11 +1,11 @@
-export const getSchema = async ({ refs = null, System, setSchema }) => {
+export const getSchema = async ({ refs = null, system, setSchema }) => {
   try {
     const schemaMap = {
       HelpDesk: () => import("@/Utils/Schemas/HelpDesk.json"),
       WebPage: () => import("@/Utils/Schemas/WebPage.json"),
       EmailsUsers: () => import("@/Utils/Schemas/EmailsUsers.json"),
     };
-    const module = await schemaMap[System.param]();
+    const module = await schemaMap[system.param]();
     const Schema = module.Schema || module.default;
 
     if (refs) {
