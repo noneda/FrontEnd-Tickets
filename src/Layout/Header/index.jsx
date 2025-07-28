@@ -6,7 +6,7 @@ const LayoutHeader = () => {
       <section className="w-full bg-[#3366CC] px-6 py-3">
         <figure className="lg:container mx-auto flex items-center justify-center lg:justify-start">
           <img
-            src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/logoGov.svg"
+            src="/logoGov.svg"
             className="w-32 object-contain"
             alt="logo republica de Colombia"
           />
@@ -17,14 +17,14 @@ const LayoutHeader = () => {
           <section className="flex gap-6">
             <a className="w-[80px]">
               <img
-                src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/Escudo_de_Colombia.png"
+                src="/Escudo_de_Colombia.webp"
                 alt="Escudo de la republica de Colombia"
                 className="w-full h-full object-contain"
               />
             </a>
             <a className="w-[80px]">
               <img
-                src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/escudo-municipio.png"
+                src="/icon.webp"
                 alt="Escudo de la republica de Colombia"
                 className="w-full h-full object-contain"
               />

@@ -86,7 +86,7 @@ export const getTicket = async ({
       });
       sets.setUser(data?.user || {});
       sets.setData(data?.data || []);
-      sets.setObservation(data?.observation || []);
+      sets.setObservation(data?.observation || [""]);
     }
   } catch (err) {
     const status = err.response?.status;
@@ -95,11 +95,15 @@ export const getTicket = async ({
   }
 };
 
-export const getDocuments = async ({ id }) => {
+export const getDocuments = async ({ id, setDocuments }) => {
   try {
     const { status, data } = await HTTP.get(`documents/send/?ticket=${id}`);
     if (status === 200) {
-      
+      setDocuments(data.documents);
     }
-  } catch (err) {}
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error desconocido ${status ? `(${status})` : ""}`);
+    console.log("Error with: ", err.message);
+  }
 };

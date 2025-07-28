@@ -41,7 +41,7 @@ const Routes = createBrowserRouter([
         ),
       },
       {
-        path: "/OneItem",
+        path: "/OneItem/",
         Component: OneItem,
       },
     ],

@@ -1,15 +1,21 @@
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
-import { getTicket } from "../../Utils/Api/GET";
+import { getTicket, getDocuments } from "@/Utils/Api/GET";
 import States from "@/Utils/States/States.json";
 import { getSchema } from "@/Utils/Schemas";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const useOneItem = () => {
   const [schema, setSchema] = useState([]);
+
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
   const statesColor = States;
   const [styles, setStyles] = useState({});
   const [system, setSystem] = useState();
 
+  const [documents, setDocuments] = useState([]);
   const [ticket, setTicket] = useState({});
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);
@@ -23,7 +29,8 @@ export const useOneItem = () => {
       setObservation,
     };
 
-    getTicket({ idTicket: 1, sets: sets });
+    getTicket({ idTicket: id, sets: sets });
+    getDocuments({ id: id, setDocuments: setDocuments });
   }, []);
 
   useEffect(() => {
@@ -38,5 +45,16 @@ export const useOneItem = () => {
     }
   }, [ticket, setSchema]);
 
-  return [ticket, user, data, observation, statesColor, styles, system, schema];
+  return [
+    ticket,
+    user,
+    data,
+    observation,
+    setObservation,
+    documents,
+    statesColor,
+    styles,
+    system,
+    schema,
+  ];
 };

@@ -1,10 +1,19 @@
+import HandleObservation from "./HandleObservation";
 import { useOneItem } from "./hook";
-
+import { TicketData, DocumentsData } from "./memo";
 const OneItem = () => {
-  const [ticket, user, data, observation, statesColor, styles, system, schema] =
-    useOneItem();
-
-  console.log(ticket);
+  const [
+    ticket,
+    user,
+    data,
+    observation,
+    setObservation,
+    documents,
+    statesColor,
+    styles,
+    system,
+    schema,
+  ] = useOneItem();
 
   return (
     <form className="flex flex-col justify-center items-center shadow-2xl rounded-2xl min-w-90 py-2 relative ">
@@ -41,32 +50,25 @@ const OneItem = () => {
         </h4>
         <ul>
           <li>
-            <h2 className="text-xl">{ticket?.service}</h2>
+            <h2 className="text-xl">
+              <b>Service</b> <br />
+              {ticket?.service}
+            </h2>
           </li>
-          {data?.map((element, index) => (
-            <li key={"request-ticket-" + index}>
-              {Object.entries(element).map(([key, values]) => {
-                const data = schema.find((item) => {
-                  if (item.id === key) return item;
-                });
-                return (
-                  <div>
-                    <b>{data?.Question}</b>
-                    <p className="px-5 truncate">
-                      {Array.isArray(values)
-                        ? values.join(", ")
-                        : String(values)}
-                    </p>
-                  </div>
-                );
-              })}
-            </li>
-          ))}
         </ul>
+        <TicketData data={data} schema={schema} />
       </section>
       <section className="border-t border-t-black w-5/6 py-2 px-5">
         <h4 className={`text-2xl ${styles.text} pb-5 font-bold`}>Documents</h4>
+        <ul>
+          <DocumentsData documents={documents} />
+        </ul>
       </section>
+      <HandleObservation
+        styles={styles}
+        data={observation}
+        set={setObservation}
+      />
     </form>
   );
 };

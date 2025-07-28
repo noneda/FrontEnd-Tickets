@@ -17,12 +17,12 @@ const LayoutFooter = () => {
           <section className="col-span-1 flex flex-col gap-6 justify-center items-center w-full xl:w-1/2 ">
             <div className="flex flex-row justify-center items-center xl:self-end-safe">
               <img
-                src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/Escudo_de_Colombia.png"
+                src="/Escudo_de_Colombia.webp"
                 alt="Escudo de la república de Colombia"
                 className="w-[80px] h-14 xl:w-[80px] xl:h-[5rem] object-contain"
               />
               <img
-                src="https://www.cota-cundinamarca.gov.co/SiteAssets/V3/assets/img/escudo-municipio.png"
+                src="/icon.webp"
                 alt="Escudo del municipio de Puerto Asis"
                 className="w-[80px] h-14 xl:w-[80px] xl:h-[5rem] object-contain"
               />
