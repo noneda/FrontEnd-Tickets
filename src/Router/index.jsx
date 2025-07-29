@@ -1,15 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Layout from "@/Layout";
-import ViewAuthContext from "@/Context";
 import ViewDashBoard from "@/Context/Dashboard";
-import SystemApp from "@/Pages/System";
-// import Form from "@/Pages/System/Form"; //TODO: This is a Example how are the Styles from ALL
 import DashBoard from "@/Pages/Dashboard";
-import Login from "@/Pages/Login";
-import Form from "@/Pages/System/Form";
-import Auth from "./Auth";
+import ViewAuthContext from "@/Context";
 import OneItem from "@/Assets/OneItem";
+import Form from "@/Pages/System/Form";
+import SystemApp from "@/Pages/System";
+import Login from "@/Pages/Login";
+import Layout from "@/Layout";
+import Auth from "./Auth";
 
 const Routes = createBrowserRouter([
   {
@@ -41,7 +40,7 @@ const Routes = createBrowserRouter([
         ),
       },
       {
-        path: "/OneItem/",
+        path: "/dashboard/ticket/",
         Component: OneItem,
       },
     ],

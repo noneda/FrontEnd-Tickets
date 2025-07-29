@@ -1,10 +1,14 @@
 import { useTicketsWebSocket } from "@/Utils/WebSocket/useItems";
 import { SectSystem } from "@/Utils/SystemApp";
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useSomeItems = () => {
+  const navigate = useNavigate();
   const [group, setGroup] = useState(0);
   const [codeSelect, setCodeSelect] = useState(null);
+
+
 
   const handleNext = useCallback(() => {
     setGroup(group + 1);

@@ -1,15 +1,22 @@
 import { memo } from "react";
 import { colorMap } from "@/Utils/SystemApp";
 import colorStates from "@/Utils/States/Colors.json";
+import { useNavigate } from "react-router-dom";
 
-export const GroupedData = memo(({ grouped }) =>
-  grouped.map((element, index) => {
+export const GroupedData = memo(({ grouped }) => {
+  const navigate = useNavigate();
+  const handleNavigate = (element) => {
+    navigate(`ticket/?id=${element.id}`);
+  };
+
+  return grouped.map((element, index) => {
     const styles = colorMap[element.color] || colorMap.white;
     const statesColor = colorStates;
     return (
-      <div
+      <button
         key={index}
         className="relative w-full h-12 shadow-xl/15 rounded-lg flex flex-row justify-baseline items-center gap-5 p-1 hover:scale-[1.05] lg:hover:scale-[1.01] cursor-pointer"
+        onClick={() => handleNavigate(element)}
       >
         <span
           className={`h-full min-w-10 max-w-20 rounded-md px-1 ${styles.bgGradient} text-white text-sm text-wrap text-center truncate pt-2.5 `}
@@ -25,10 +32,10 @@ export const GroupedData = memo(({ grouped }) =>
         <span className="absolute -bottom-2 right-0 text-xs rounded-xs text-white font-bold bg-zinc-400 py-0.5 px-1">
           {element.submissionDate}
         </span>
-      </div>
+      </button>
     );
-  })
-);
+  });
+});
 
 export const FooterData = memo(({ group, allGroups }) =>
   [0, group, allGroups - 1]

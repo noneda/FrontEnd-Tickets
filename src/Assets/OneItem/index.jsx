@@ -11,14 +11,18 @@ const OneItem = () => {
     setObservation,
     documents,
     statesColor,
-    state,
+    stateList,
     styles,
     system,
     schema,
+    handleSubmit,
   ] = useOneItem();
 
   return (
-    <form className="flex flex-col justify-center items-center shadow-2xl rounded-2xl min-w-90 py-2 relative ">
+    <form
+      className="flex flex-col justify-center items-center shadow-2xl rounded-2xl min-w-90 py-2 relative"
+      onSubmit={handleSubmit}
+    >
       <section className="flex flex-row flex-wrap justify-evenly gap-5 w-full">
         <h1
           className={`w-5/6 ${styles.bgGradient} text-white font-bold text-lg text-center text-wrap truncate py-2.5 rounded-4xl `}
@@ -80,7 +84,7 @@ const OneItem = () => {
           value={ticket?.state}
           onChange={handleTicketStateChange}
         >
-          {state.map((element) => (
+          {stateList.map((element) => (
             <option key={"state-" + element} value={element}>
               {element}
             </option>
