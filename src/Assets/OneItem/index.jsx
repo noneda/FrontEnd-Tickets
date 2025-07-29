@@ -4,12 +4,14 @@ import { TicketData, DocumentsData } from "./memo";
 const OneItem = () => {
   const [
     ticket,
+    handleTicketStateChange,
     user,
     data,
     observation,
     setObservation,
     documents,
     statesColor,
+    state,
     styles,
     system,
     schema,
@@ -55,8 +57,8 @@ const OneItem = () => {
               {ticket?.service}
             </h2>
           </li>
+          <TicketData data={data} schema={schema} />
         </ul>
-        <TicketData data={data} schema={schema} />
       </section>
       <section className="border-t border-t-black w-5/6 py-2 px-5">
         <h4 className={`text-2xl ${styles.text} pb-5 font-bold`}>Documents</h4>
@@ -69,6 +71,28 @@ const OneItem = () => {
         data={observation}
         set={setObservation}
       />
+      <section className="w-full h-auto flex flex-col justify-center items-center gap-5 pb-5">
+        <label htmlFor={"select-states"} className={`text-xl ${styles.text}`}>
+          Estado de Ticket
+        </label>
+        <select
+          className={`text-sm custom-input py-2 border rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 w-7/12 ${styles.inputText} pl-4 text-gray-600`}
+          value={ticket?.state}
+          onChange={handleTicketStateChange}
+        >
+          {state.map((element) => (
+            <option key={"state-" + element} value={element}>
+              {element}
+            </option>
+          ))}
+        </select>
+      </section>
+      <button
+        className={`select-none rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md ${styles.button}  transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+        type="submit"
+      >
+        Update
+      </button>
     </form>
   );
 };

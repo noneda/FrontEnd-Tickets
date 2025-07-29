@@ -1,22 +1,43 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { getEmailBySuggest } from "@/Utils/Api/GET";
 
 export const useEmailSuggestion = (refObj, autocomplete) => {
   const [suggestion, setSuggestion] = useState("");
   const [ghost, setGhost] = useState(false);
-
-  const handleChange = async () => {
+  const timeoutRef = useRef(null);
+  const handleChange = useCallback(async () => {
     const value = refObj.current?.value?.trim();
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     if (!value || value.length < 2) {
       setSuggestion("");
       setGhost(false);
       return;
     }
 
-    const matches = await getEmailBySuggest(value);
-    setSuggestion(matches);
-    setGhost(true);
-  };
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const matches = await getEmailBySuggest(value);
+        setSuggestion(matches);
+        setGhost(true);
+      } catch (error) {
+        console.error("Error fetching email suggestion:", error);
+        setSuggestion("");
+        setGhost(false);
+      }
+    }, 500);
+  }, [refObj]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleKeyDown = (e) => {
     if (e.key === "Tab" && ghost) {
@@ -26,6 +47,10 @@ export const useEmailSuggestion = (refObj, autocomplete) => {
         setSuggestion("");
         setGhost(false);
         autocomplete(true);
+
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
       }
     }
   };
@@ -35,6 +60,10 @@ export const useEmailSuggestion = (refObj, autocomplete) => {
       refObj.current.value = suggestion;
       setGhost(false);
       autocomplete(true);
+
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     }
   };
 

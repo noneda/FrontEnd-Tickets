@@ -1,11 +1,16 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { getUserByEmail, getBasicData } from "@/Utils/Api/GET";
 import { useParams, useNavigate } from "react-router-dom";
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
-import { getUserByEmail, getBasicData } from "@/Utils/Api/GET";
-import { sendTicket, sendDocuments } from "@/Utils/Api/POST";
 import { getSchema } from "@/Utils/Schemas";
+import {
+  sendTicket,
+  sendDocuments,
+  getOrCreateUser,
+  sendMail,
+} from "@/Utils/Api/POST";
 
-const useHelpDesk = () => {
+const useForm = () => {
   const navigate = useNavigate();
   const refs = useRef({});
   const [schema, setSchema] = useState([]);
@@ -50,12 +55,12 @@ const useHelpDesk = () => {
 
   const handlePopUp = useCallback(() => {
     setPopUp(!isPopUp);
-    // navigate("/");
   }, [isPopUp]);
 
-  const sendData = () => {
+  const sendData = async () => {
     const dataTicket = {};
     const documentsData = new FormData();
+    let documentCount = 0;
 
     schema.forEach((field) => {
       const ref = refs.current[field.id];
@@ -63,6 +68,7 @@ const useHelpDesk = () => {
       if (field.type === "TypeArchive") {
         [...ref.current.files].forEach((file) => {
           documentsData.append("documents", file);
+          documentCount++;
         });
       } else if (field.type === "TypeChoose") {
         dataTicket[field.id] = ref.current
@@ -80,14 +86,53 @@ const useHelpDesk = () => {
       department: refs.current.department.current.value,
     };
 
-    console.log(user);
+    try {
+      const userCreatedOrFound = await getOrCreateUser({ user: user });
+      if (!userCreatedOrFound) {
+        alert("Error: No se pudo crear o verificar el usuario.");
+        return;
+      }
 
-    sendTicket(dataTicket, typeTicket, user, setTicket).then((ticket) => {
-      if (!ticket?.id) return alert("No se generó el ticket correctamente");
-      documentsData.append("secretariat", user.department);
-      documentsData.append("ticket", ticket.id);
-      sendDocuments(documentsData, handlePopUp);
-    });
+      const ticketData = await sendTicket(
+        dataTicket,
+        typeTicket,
+        user.email,
+        setTicket
+      );
+      if (!ticketData) {
+        alert("Error: No se generó el ticket correctamente.");
+        return;
+      }
+
+      if (documentCount > 0) {
+        documentsData.append("secretariat", user.department);
+        documentsData.append("ticket", isTicket?.id);
+        const documentsSent = await sendDocuments(documentsData);
+        if (!documentsSent) {
+          alert("Error: No se pudieron adjuntar los documentos al ticket.");
+          return;
+        }
+      } else {
+        console.log(
+          "No hay documentos para adjuntar. Se omite la llamada a la API de documentos."
+        );
+      }
+
+      const mailSent = await sendMail({ ticket: isTicket.id, mail: user });
+      if (!mailSent) {
+        alert("Error: No se pudo enviar la notificación por correo.");
+        return;
+      }
+
+      handlePopUp();
+      alert("¡Ticket generado y procesado exitosamente!");
+    } catch (error) {
+      console.error(
+        "Un error inesperado ocurrió durante el proceso del ticket:",
+        error
+      );
+      alert("Ocurrió un error inesperado. Por favor, inténtelo de nuevo.");
+    }
   };
 
   const handleForm = (e) => {
@@ -110,4 +155,4 @@ const useHelpDesk = () => {
   ];
 };
 
-export default useHelpDesk;
+export default useForm;

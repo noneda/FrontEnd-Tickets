@@ -1,6 +1,7 @@
 import { SectSystem, colorMap } from "@/Utils/SystemApp";
 import { getTicket, getDocuments } from "@/Utils/Api/GET";
-import States from "@/Utils/States/States.json";
+import colorStates from "@/Utils/States/Colors.json";
+import states from "@/Utils/States/States.json";
 import { getSchema } from "@/Utils/Schemas";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -11,7 +12,8 @@ export const useOneItem = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 
-  const statesColor = States;
+  const statesColor = colorStates;
+  const state = states;
   const [styles, setStyles] = useState({});
   const [system, setSystem] = useState();
 
@@ -45,14 +47,24 @@ export const useOneItem = () => {
     }
   }, [ticket, setSchema]);
 
+  const handleTicketStateChange = (event) => {
+    const newState = event.target.value;
+    setTicket((prevTicket) => ({
+      ...prevTicket,
+      state: newState,
+    }));
+  };
+
   return [
     ticket,
+    handleTicketStateChange,
     user,
     data,
     observation,
     setObservation,
     documents,
     statesColor,
+    state,
     styles,
     system,
     schema,

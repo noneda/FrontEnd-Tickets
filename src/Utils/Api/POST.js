@@ -10,7 +10,9 @@ export const sendTicket = async (send, type, user, setTicket) => {
 
     if (status === 200) {
       setTicket(data);
-      return data;
+      return true;
+    } else {
+      false;
     }
   } catch (err) {
     const status = err.response?.status;
@@ -19,15 +21,38 @@ export const sendTicket = async (send, type, user, setTicket) => {
   }
 };
 
-export const sendDocuments = async (documentsData, handlePopUp) => {
+export const sendDocuments = async (documentsData) => {
   try {
     const { status } = await HTTP.post("documents/send/", documentsData);
-    if (status === 200) {
-      handlePopUp();
-    }
+    return status === 200 ? true : false;
   } catch (err) {
     const status = err.response?.status;
     alert(`Error desconocido${status ? ` (${status})` : ""}`);
+    console.error("Error with", err.message);
+  }
+};
+
+export const getOrCreateUser = async ({ user }) => {
+  try {
+    const { status } = await HTTP.post("helper/user/", { user: user });
+    return status === 200 ? true : false;
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error desconocido ${status ? `(${status})` : ""}`);
+    console.error("Error with", err.message);
+  }
+};
+
+export const sendMail = async ({ ticket, mail }) => {
+  try {
+    const { status } = await HTTP.post("helper/mail/", {
+      ticket: ticket,
+      mail: mail,
+    });
+    return status === 200 ? true : false;
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error descocido ${status ? `${status}` : ""}`);
     console.error("Error with", err.message);
   }
 };

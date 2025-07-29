@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { colorMap } from "@/Utils/SystemApp";
-import States from "@/Utils/States/States.json";
+import colorStates from "@/Utils/States/Colors.json";
 
 export const GroupedData = memo(({ grouped }) =>
   grouped.map((element, index) => {
     const styles = colorMap[element.color] || colorMap.white;
-    const statesColor = States;
+    const statesColor = colorStates;
     return (
       <div
         key={index}

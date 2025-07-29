@@ -1,6 +1,6 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useCallback } from "react";
 
-export const useHandleObservation = ({ data, set }) => {
+export const useHandleObservation = ({ set }) => {
   const handleChange = (event, index) => {
     set((prev) => {
       const newData = [...prev];

@@ -1,5 +1,3 @@
-import { handlePopUpSearch } from "./hook";
-
 // TODO: Faltan los refs
 const PopUpSearch = ({ show, handle, search, handleSearch }) => {
   return (
