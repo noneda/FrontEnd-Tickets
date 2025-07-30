@@ -3,6 +3,7 @@ import { getTicket, getDocuments } from "@/Utils/Api/GET";
 import colorStates from "@/Utils/States/Colors.json";
 import { useSearchParams } from "react-router-dom";
 import { patchTickets } from "@/Utils/Api/PATCH";
+import { sendUpdate } from "@/Utils/Api/POST";
 import states from "@/Utils/States/States.json";
 import { getSchema } from "@/Utils/Schemas";
 import { useEffect, useState } from "react";
@@ -58,10 +59,22 @@ export const useOneItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const change = await patchTickets({
+    patchTickets({
       id: ticket?.id,
       observation: observation,
       state: ticket?.state,
+    }).then((update) => {
+      if (!update) {
+        alert("Error a la hora de Actualizar los Datos");
+        return;
+      }
+      sendUpdate({ ticket: ticket, mail: user }).then((ok) => {
+        if (!ok) {
+          alert("Error a la hora de enviar el Mail");
+          return;
+        }
+        alert(`Ticket Actualizado!!`);
+      });
     });
 
     console.log(observation);

@@ -54,5 +54,21 @@ export const sendMail = async ({ ticket, mail }) => {
     const status = err.response?.status;
     alert(`Error descocido ${status ? `${status}` : ""}`);
     console.error("Error with", err.message);
+    return false;
+  }
+};
+
+export const sendUpdate = async ({ ticket, mail }) => {
+  try {
+    const { status } = await HTTP.post("helper/privateMail/", {
+      ticket: ticket,
+      mail: mail,
+    });
+    return status === 200 ? true : false;
+  } catch (err) {
+    const status = err.response?.status;
+    alert(`Error descocido ${status ? `${status}` : ""}`);
+    console.error("Error with", err.message);
+    return false;
   }
 };
