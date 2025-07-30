@@ -31,17 +31,23 @@ const Routes = createBrowserRouter([
         path: "/dashboard",
         element: (
           <ViewAuthContext>
-            <ViewDashBoard>
-              <Auth>
-                <DashBoard />
-              </Auth>
-            </ViewDashBoard>
+            <Auth />
           </ViewAuthContext>
         ),
-      },
-      {
-        path: "/dashboard/ticket/",
-        Component: OneItem,
+        children: [
+          {
+            index: true,
+            element: (
+              <ViewDashBoard>
+                <DashBoard />
+              </ViewDashBoard>
+            ),
+          },
+          {
+            path: "ticket/",
+            Component: OneItem,
+          },
+        ],
       },
     ],
   },

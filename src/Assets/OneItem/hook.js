@@ -31,7 +31,6 @@ export const useOneItem = () => {
       setData,
       setObservation,
     };
-
     getTicket({ idTicket: id, sets: sets });
     getDocuments({ id: id, setDocuments: setDocuments });
   }, []);
@@ -58,12 +57,14 @@ export const useOneItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const change = await patchTickets({
       id: ticket?.id,
       observation: observation,
       state: ticket?.state,
     });
-    
+
+    console.log(observation);
   };
 
   return [

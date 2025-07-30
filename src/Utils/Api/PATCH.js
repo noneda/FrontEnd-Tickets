@@ -1,12 +1,13 @@
 import { HTTP } from "@/Shared";
 
-export const patchTickets = async ({ id, observations, state }) => {
+export const patchTickets = async ({ id, observation, state }) => {
   try {
     const payload = {
       ticket: id,
-      observations: observations,
+      observation: observation,
       state: state,
     };
+    console.log(payload);
 
     const { status } = await HTTP.patch("ticket/private/", payload);
     return status === 202 ? true : false;

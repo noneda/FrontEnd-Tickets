@@ -86,7 +86,9 @@ export const getTicket = async ({
       });
       sets.setUser(data?.user || {});
       sets.setData(data?.data || []);
-      sets.setObservation(data?.observation || [""]);
+      sets.setObservation(
+        [...data?.observations.map((element) => element?.text)] || [""]
+      );
     }
   } catch (err) {
     const status = err.response?.status;

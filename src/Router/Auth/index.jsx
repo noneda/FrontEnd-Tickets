@@ -1,8 +1,9 @@
 import { getAuthentication } from "@/Utils/Api/AUTH";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-const Auth = ({ children }) => {
+const Auth = () => {
   const navigate = useNavigate();
   const authenticate = async () => {
     const haveToken = localStorage.getItem("token");
@@ -22,7 +23,7 @@ const Auth = ({ children }) => {
     return () => clearInterval(interval);
   }, [navigate]);
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default Auth;
