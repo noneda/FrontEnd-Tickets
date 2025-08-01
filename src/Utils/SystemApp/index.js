@@ -32,6 +32,8 @@ export const colorMap = {
     button: "bg-purple-500 shadow-purple-500/20 hover:shadow-purple-500/40",
     inputText: "border-purple-300 focus:outline-[purple] hover:border-[purple]",
     inputCheck: "border-purple-500 peer-checked:bg-purple-400",
+    border:
+      "border border-purple-50 shadow-purple-500/20 hover:shadow-purple-500/30",
   },
   green: {
     bgGradient: "bg-gradient-to-r from-green-400 to-green-500",
@@ -39,6 +41,7 @@ export const colorMap = {
     button: "bg-green-500 shadow-green-500/20 hover:shadow-green-500/40",
     inputText: "border-green-300 focus:outline-[green] hover:border-[green]",
     inputCheck: "border-green-500 peer-checked:bg-green-400",
+    border: "border border-green-50",
   },
   blue: {
     bgGradient: "bg-gradient-to-r from-blue-300 to-blue-400",
@@ -46,5 +49,6 @@ export const colorMap = {
     button: "bg-blue-400 shadow-blue-400/20 hover:shadow-blue-400/40",
     inputText: "border-blue-300 focus:outline-[blue] hover:border-[blue]",
     inputCheck: "border-blue-500 peer-checked:bg-blue-400",
+    border: "border border-blue-100 ",
   },
 };

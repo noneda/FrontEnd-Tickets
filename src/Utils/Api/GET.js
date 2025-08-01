@@ -89,6 +89,9 @@ export const getTicket = async ({
       sets.setObservation(
         [...data?.observations.map((element) => element?.text)] || [""]
       );
+      sets.setNewObservation(
+        [...data?.observations.map((element) => element?.text)] || [""]
+      );
     }
   } catch (err) {
     const status = err.response?.status;

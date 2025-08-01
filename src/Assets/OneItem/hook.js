@@ -1,18 +1,27 @@
-import { SectSystem, colorMap } from "@/Utils/SystemApp";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { getTicket, getDocuments } from "@/Utils/Api/GET";
+import { SectSystem, colorMap } from "@/Utils/SystemApp";
 import colorStates from "@/Utils/States/Colors.json";
 import { useSearchParams } from "react-router-dom";
 import { patchTickets } from "@/Utils/Api/PATCH";
-import { sendUpdate } from "@/Utils/Api/POST";
 import states from "@/Utils/States/States.json";
+import { sendUpdate } from "@/Utils/Api/POST";
 import { getSchema } from "@/Utils/Schemas";
-import { useEffect, useState } from "react";
 
 export const useOneItem = () => {
+  const refAbsolute = useRef(null);
+  const hiddenAbsolute = () => {
+    if (refAbsolute.current) {
+      refAbsolute.current.checked = !refAbsolute.current.checked;
+    }
+  };
+
   const [schema, setSchema] = useState([]);
 
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
+
+  const [isState, setState] = useState(true);
 
   const statesColor = colorStates;
   const stateList = states;
@@ -24,6 +33,8 @@ export const useOneItem = () => {
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);
   const [observation, setObservation] = useState([]);
+  const [newObservation, setNewObservation] = useState([]);
+  const [isObservation, setIsObservation] = useState(false);
 
   useEffect(() => {
     const sets = {
@@ -31,6 +42,7 @@ export const useOneItem = () => {
       setUser,
       setData,
       setObservation,
+      setNewObservation,
     };
     getTicket({ idTicket: id, sets: sets });
     getDocuments({ id: id, setDocuments: setDocuments });
@@ -48,20 +60,22 @@ export const useOneItem = () => {
     }
   }, [ticket, setSchema]);
 
-  const handleTicketStateChange = (event) => {
-    const newState = event.target.value;
+  const handleTicketStateChange = (newState) => {
     setTicket((prevTicket) => ({
       ...prevTicket,
       state: newState,
     }));
+    setState(!isState);
   };
+
+  const SeeObservation = () => setIsObservation(!isObservation);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     patchTickets({
       id: ticket?.id,
-      observation: observation,
+      observation: newObservation,
       state: ticket?.state,
     }).then((update) => {
       if (!update) {
@@ -74,24 +88,29 @@ export const useOneItem = () => {
           return;
         }
         alert(`Ticket Actualizado!!`);
+        window.location.reload();
       });
     });
-
-    console.log(observation);
   };
 
   return [
+    refAbsolute,
+    hiddenAbsolute,
     ticket,
     handleTicketStateChange,
+    isState,
+    setState,
     user,
     data,
     observation,
-    setObservation,
+    newObservation,
+    setNewObservation,
+    isObservation,
+    SeeObservation,
     documents,
     statesColor,
     stateList,
     styles,
-    system,
     schema,
     handleSubmit,
   ];

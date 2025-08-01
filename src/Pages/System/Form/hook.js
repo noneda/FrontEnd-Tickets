@@ -120,12 +120,10 @@ const useForm = () => {
 
       const mailSent = await sendMail({ ticket: isTicket.id, mail: user });
       if (!mailSent) {
-        alert("Error: No se pudo enviar la notificación por correo.");
-        return;
+        console.error("No se pudo enviar el ticket por el correo... ");
       }
 
       handlePopUp();
-      alert("¡Ticket generado y procesado exitosamente!");
     } catch (error) {
       console.error(
         "Un error inesperado ocurrió durante el proceso del ticket:",

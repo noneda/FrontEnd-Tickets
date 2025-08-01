@@ -2,21 +2,28 @@ import { memo, useCallback } from "react";
 
 export const TicketData = memo(({ data, schema }) =>
   data?.map((element, index) => (
-    <li key={"request-ticket-" + index}>
+    <div
+      className="flex items-center justify-between text-sm"
+      key={"request-ticket-" + index}
+    >
       {Object.entries(element).map(([key, values]) => {
         const data = schema.find((item) => {
           if (item.id === key) return item;
         });
+        const htmlString = Array.isArray(values)
+          ? values.join(" </br>")
+          : String(values);
         return (
           <div key={"values-ticket-" + key}>
-            <b>{data?.Question}</b>
-            <p className="px-5 truncate">
-              {Array.isArray(values) ? values.join(", ") : String(values)}
-            </p>
+            <span className="text-gray-600">{data?.Question}</span>
+            <p
+              className="px-5 truncate text-sm font-light"
+              dangerouslySetInnerHTML={{ __html: htmlString }}
+            ></p>
           </div>
         );
       })}
-    </li>
+    </div>
   ))
 );
 
@@ -42,7 +49,7 @@ export const DocumentsData = memo(({ documents }) => {
   }, []);
 
   return documents?.map((element, index) => (
-    <li
+    <div
       key={"documents-" + index}
       className="flex flex-row items-center justify-baseline gap-3"
     >
@@ -54,7 +61,7 @@ export const DocumentsData = memo(({ documents }) => {
       >
         <img
           src="/download.svg"
-          className="size-6 right-[10%] xl:right-3 text-gray-500"
+          className="size-4 right-[10%] xl:right-3 text-gray-500"
           alt="Icono de descarga"
         />
       </button>
@@ -66,6 +73,32 @@ export const DocumentsData = memo(({ documents }) => {
       >
         {element.name}
       </a>
-    </li>
+    </div>
   ));
 });
+
+export const StatesData = memo(
+  ({ statesColor, state, stateList, handle, isState, setState }) =>
+    isState ? (
+      <button
+        type="button"
+        className={`font-semibold inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs  transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80 ${statesColor[state]?.oneItem}`}
+        onClick={() => setState(!isState)}
+      >
+        {statesColor[state]?.translate}
+      </button>
+    ) : (
+      stateList.map((element) => (
+        <button
+          type="button"
+          key={"States-" + element}
+          className={`font-semibold inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs  transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80 ${
+            statesColor[element]?.oneItem
+          } ${state === element && "uppercase"}`}
+          onClick={() => handle(element)}
+        >
+          {statesColor[element]?.translate}
+        </button>
+      ))
+    )
+);
